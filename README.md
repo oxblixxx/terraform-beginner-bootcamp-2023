@@ -138,7 +138,7 @@ You can install providers using the terraform init command.
 
 ### TERRAFORM INIT
 Running terraform init downloads terraform binaries, lockfile and statefile.
-NOTE: The **lockfile** should be pushed to versioning control, the **statefile** should not be pushed
+NOTE: The **.terraform.lock.hcl** should be pushed to versioning control, the **terraform.tfstate** should not be pushed
 
 ### TERRAFORM RESOURCE
 Resources are defined in Terraform configuration files using the resource block. The resource block specifies the type of resource, the provider that Terraform should use to manage the resource, and the properties of the resource.
