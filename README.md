@@ -112,6 +112,8 @@ export AWS_DEFAULT_REGION=us-east-1
 gp env AWS_DEFAULT_REGION=us-east-1
 
 ```
+Get the list of environment variables with `env` and get a specific env vars with `env | grep <name>`
+
 Stop the currentspace to spin a new workspace confirm if your credentials are injected.
 
 ## GENERATING A RANDOM BUCKET NAME WITH TERRAFORM
