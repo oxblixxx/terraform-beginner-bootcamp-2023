@@ -237,6 +237,46 @@ Change the `hostname` to `app.terraform.io`
 
 Run `Terraform init` again and `terraform plan` to see the changeset then run `terraform apply --auto-approve`
 
+### FIX TERRAFORM LOGIN MY RUNNING SCRIPT TO CREATE A TEMPLATE
+ChatGPT create a script to created a script to automate creating template for `credentials.tfrc.json`.
+
+Created a folder template, then created a file with the above json credential block of code.
+
+```sh
+#!/bin/bash
+
+# Get the path to the file that you want to put in the credentials folder
+
+file_path=../template/credentials.trfc.json
+
+
+# Create the credentials folder if it doesn't exist
+if [ ! -d "/home/gitpod/.terraform.d/credentials" ]; then
+  mkdir -p "/home/gitpod/.terraform.d/credentials"
+fi
+
+# Copy the file to the credentials folder
+cp "$file_path" "/home/gitpod/.terraform.d/credentials/credentials.tfrc.json"
+
+# Print a success message
+echo "File copied successfully to /home/gitpod/.terraform.d/credentials/credentials.tfrc.json"
+```
+
+NB: Ensure not to put your token in the template, because you wouldnt want to expose that.
+
+Update .gitpod.yml to run the script after opening up a new workspace by updating the terraform task block
+
+```
+      soruce /workspace/terraform-beginner-bootcamp-2023/bin/create_credentials_trfc
+```
+
+Manually put in your token in the folder
+
+```
+nano /home/gitpod/.terraform.d/credentials/credentials.tfrc.json
+```
+
+
 
 
 
