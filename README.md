@@ -118,8 +118,8 @@ export AWS_REGION='us-east-1'
 gp env AWS_REGION='us-east-1'
 
 ```
-Get the list of environment variables with `env` and get a specific env vars with `env | grep <name>`
-
+Get the list of environment variables with `env` and get a specific env vars with `env | grep <name>`. Use the unset `<env_var>` to remove set variables. Use the `gp env` to see list of variables for gitpod and `gp env -u <env-var>` to unset.
+ 
 Stop the currentspace to spin a new workspace confirm if your credentials are injected.
 
 ## GENERATING A RANDOM BUCKET NAME WITH TERRAFORM
