@@ -75,8 +75,46 @@ update the .gitignore file to ignore aws files, made an exception for /bin/aws [
 aws*
 ```
 
+### SETTING UP AWS CLI
 
+Authenticating IAM users through the CLI[^3]. Login to your AWS account, create an IAM user[^3], fetch your access keys[^3], configure the aws cli[^3]. To configure the AWS cli, paste the respective values of the prompt:
 
+```bash
+aws configure
+----
+AWS Access Key ID [None]: AKIAIOSFODNN7EXAMPLE
+AWS Secret Access Key [None]: wJalrXUtnFEMI/K7MDENG/bPxRfiCYEXAMPLEKEY
+Default region name [None]: us-west-2
+Default output format [None]: json
+---
+```
+
+To confirm if your credentials were succesfully injected, upon returning this is a success:
+```
+aws sts get-caller-identity
+---
+  "UserId": "434215245806",
+  "Account": "434215245806",
+  "Arn": "arn:aws:iam::434215245806:terraform-bootcamp"
+---
+```
+
+Set up the env vars on gitpod using command **"export"** and **"gp env"**[^4] to inject the variables.
+
+```
+export "AWS_ACCESS_KEY_ID=AKIAIOSFODNN7EXAMPLE"
+gp env "AWS_ACCESS_KEY_ID=AKIAIOSFODNN7EXAMPLE"
+
+export AWS_SECRET_ACCESS_KEY= wJalrXUtnFEMI/K7MDENG/bPxRfiCYEXAMPLEKEY
+gp env AWS_SECRET_ACCESS_KEY= wJalrXUtnFEMI/K7MDENG/bPxRfiCYEXAMPLEKEY
+
+export AWS_DEFAULT_REGION=us-east-1
+gp env AWS_DEFAULT_REGION=us-east-1
+
+```
+Stop the currentspace to spin a new workspace confirm if your credentials are injected.
 
 [^1]:https://www.washington.edu/doit/technology-tips-chmod-overview
 [^2]:https://riptutorial.com/git/example/911/exceptions-in-a--gitignore-file
+[^3]:https://docs.aws.amazon.com/cli/latest/userguide/cli-authentication-user.html
+[^4]:https://www.gitpod.io/blog/securely-manage-development-secrets-with-doppler-and-gitpod
