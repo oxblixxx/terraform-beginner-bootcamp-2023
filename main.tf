@@ -11,6 +11,24 @@ terraform {
   }
 }
 
+# TERRAFORM CLOUD INTERGRATION
+terraform {
+  cloud {
+    organization = "oxblixxx"
+
+    workspaces {
+      name = "aws-terraform"
+    }
+  }
+}
+
+
+# https://registry.terraform.io/providers/hashicorp/aws/latest/docs
+provider "aws" {
+
+}
+
+
 provider "random" {
   # Configuration options
 }
