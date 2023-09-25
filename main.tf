@@ -23,9 +23,15 @@ terraform {
 }
 
 
-#provider "random" {
+# https://registry.terraform.io/providers/hashicorp/aws/latest/docs
+provider "aws" {
+
+}
+
+
+provider "random" {
   # Configuration options
-#}
+}
 
 
 resource "random_string" "bucket-name" {

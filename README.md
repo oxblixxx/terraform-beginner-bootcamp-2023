@@ -99,17 +99,23 @@ aws sts get-caller-identity
 ---
 ```
 
-Set up the env vars on gitpod using command **"export"** and **"gp env"**[^4] to inject the variables.
+Set up the env vars on gitpod using command **"export"** and **"gp env"**[^4] to inject the variables in gitpod.
+
+
 
 ```
-export "AWS_ACCESS_KEY_ID=AKIAIOSFODNN7EXAMPLE"
-gp env "AWS_ACCESS_KEY_ID=AKIAIOSFODNN7EXAMPLE"
+% export AWS_ACCESS_KEY_ID="anaccesskey"
+% export AWS_SECRET_ACCESS_KEY="asecretkey"
+% export AWS_REGION="us-west-2
 
-export AWS_SECRET_ACCESS_KEY= wJalrXUtnFEMI/K7MDENG/bPxRfiCYEXAMPLEKEY
-gp env AWS_SECRET_ACCESS_KEY= wJalrXUtnFEMI/K7MDENG/bPxRfiCYEXAMPLEKEY
+export AWS_ACCESS_KEY_ID='AKIAIOSFODNN7EXAMPLE
+gp env AWS_ACCESS_KEY_ID='AKIAIOSFODNN7EXAMPLE'
 
-export AWS_DEFAULT_REGION=us-east-1
-gp env AWS_DEFAULT_REGION=us-east-1
+export AWS_SECRET_ACCESS_KEY='wJalrXUtnFEMI/K7MDENG/bPxRfiCYEXAMPLEKEY'
+gp env AWS_SECRET_ACCESS_KEY='wJalrXUtnFEMI/K7MDENG/bPxRfiCYEXAMPLEKEY'
+
+export AWS_REGION='us-east-1'
+gp env AWS_REGION='us-east-1'
 
 ```
 Get the list of environment variables with `env` and get a specific env vars with `env | grep <name>`
@@ -229,7 +235,7 @@ Change the `hostname` to `app.terraform.io`
 
 ```
 
-Run `Terraform init` again and your infrastru
+Run `Terraform init` again and `terraform plan` to see the changeset then run `terraform apply --auto-approve`
 
 
 
