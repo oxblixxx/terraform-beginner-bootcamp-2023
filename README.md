@@ -118,8 +118,8 @@ export AWS_REGION='us-east-1'
 gp env AWS_REGION='us-east-1'
 
 ```
-Get the list of environment variables with `env` and get a specific env vars with `env | grep <name>`
-
+Get the list of environment variables with `env` and get a specific env vars with `env | grep <name>`. Use the unset `<env_var>` to remove set variables. Use the `gp env` to see list of variables for gitpod and `gp env -u <env-var>` to unset.
+ 
 Stop the currentspace to spin a new workspace confirm if your credentials are injected.
 
 ## GENERATING A RANDOM BUCKET NAME WITH TERRAFORM
@@ -275,6 +275,31 @@ Manually put in your token in the folder
 ```
 nano /home/gitpod/.terraform.d/credentials/credentials.tfrc.json
 ```
+
+
+### SETTING TF ENV VARIABLES ON TERRAFORM CLOUD
+After hours of dealing with running `terraform plan` got this error:
+
+```sh
+╷
+│ Error: validating provider credentials: retrieving caller identity from STS: operation error STS: GetCallerIdentity, failed to resolve service endpoint, endpoint rule error, Invalid Configuration: Missing Region
+│ 
+│   with provider["registry.terraform.io/hashicorp/aws"],
+│   on main.tf line 27, in provider "aws":
+│   27: provider "aws" {
+```
+[The solution](https://developer.hashicorp.com/terraform/tutorials/aws-get-started/aws-remote?wvideo=a2i7g8n5zj) to the error is to set up environment variables on the [Terraform cloud console](https://app.terraform.io). Open your workspace.
+
+On the left sidebar is `variables` set up `AWS_REGION`, `AWS_SECRET_ACCESS_KEY`, `AWS_ACCESS_KEY_ID` as it is on your local machine. After setting your env vars, click on run to authenticate the credentials on `Terraform console`. Henceforth you can from your local machine CLI.
+
+NB: IF you have your `ACCESS KEY` details in the provider block in your tf file, this won't be necessary. If only you are Authenticated via CLI.
+
+
+
+
+
+## ADD ALIAS FOR TF
+Google bard wrote a script to update `~/.bash_profile` with tf alias for terraform. Created a file in bin `tf_alias` and pasted the code there, tested it. Works smoothly. Update .gitpod.yml to automate the alias on spinning a new workspace.
 
 
 

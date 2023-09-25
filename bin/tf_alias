@@ -1,0 +1,13 @@
+#!/bin/bash
+
+# Get the name of the alias to update
+alias_name=tf
+
+# Get the new value of the alias
+new_value=terraform
+
+# Update the alias in the .bash_profile file
+echo "alias $alias_name='$new_value'" >> ~/.bash_profile
+
+# Print a success message
+echo "Alias '$alias_name' updated successfully."

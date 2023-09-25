@@ -35,10 +35,9 @@ provider "random" {
 
 
 resource "random_string" "bucket-name" {
-  length = 8
+  length = 15
   special = false
   override_special = ""
-  lower = false
   upper = false
 }
 
@@ -52,6 +51,8 @@ resource "aws_s3_bucket" "bootcamp-bucket" {
     Environment = "Dev"
   }
 }
+
+
 
 output "bucket-name" {
   value = random_string.bucket-name.result
