@@ -138,7 +138,23 @@ You can install providers using the terraform init command.
 
 ### TERRAFORM INIT
 Running terraform init downloads terraform binaries, lockfile and statefile.
-NOTE: The **.terraform.lock.hcl** should be pushed to versioning control, the **terraform.tfstate** should not be pushed
+NOTE: The **.terraform.lock.hcl** should be pushed to versioning control, the **terraform.tfstate** should not be pushed. `terraform apply --auto-approve` applies the change without prompting for yes. `terraform destroy --auto-approve` destroys the infrastructure, without prompt, instead use `terraform destroy`. `Terraform plan` shows the changeset of the infrastructure, if you get this error, check again with setting up your aws credentials with `aws configure`
+
+```sh
+ Error: No valid credential sources found
+│ 
+│   with provider["registry.terraform.io/hashicorp/aws"],
+│   on <empty> line 0:
+│   (source code not available)
+│ 
+│ Please see
+│ https://registry.terraform.io/providers/hashicorp/aws
+│ for more information about providing credentials.
+│ 
+│ Error: failed to refresh cached credentials, no EC2 IMDS role
+│ found, operation error ec2imds: GetMetadata, request canceled,
+│ context deadline exceeded
+```
 
 ### TERRAFORM RESOURCE
 Resources are defined in Terraform configuration files using the resource block. The resource block specifies the type of resource, the provider that Terraform should use to manage the resource, and the properties of the resource.
