@@ -51,7 +51,7 @@ UBUNTU_CODENAME=jammy
 Now! We determined the Linux kernel and OS information.
 
 
-### FIXING TERRAFORM CLI INSTALLATION FREEZE IN .GITPOD.YML
+## FIXING TERRAFORM CLI INSTALLATION FREEZE IN .GITPOD.YML
 The issue in the CLI is the missing "y" flag in the code below:
 
 ```sh
@@ -75,7 +75,7 @@ update the .gitignore file to ignore aws files, made an exception for /bin/aws [
 aws*
 ```
 
-### SETTING UP AWS CLI
+## SETTING UP AWS CLI
 
 Authenticating IAM users through the CLI[^3]. Login to your AWS account, create an IAM user[^3], fetch your access keys[^3], configure the aws cli[^3]. To configure the AWS cli, paste the respective values of the prompt:
 
@@ -113,6 +113,44 @@ gp env AWS_DEFAULT_REGION=us-east-1
 
 ```
 Stop the currentspace to spin a new workspace confirm if your credentials are injected.
+
+## GENERATING A RANDOM BUCKET NAME WITH TERRAFORM
+The [terraform registry](https://registry.terraform.io) is a public repository of Terraform modules and providers. Terraform uses to manage infrastructure resources.
+
+### TERRAFORM MODULE
+A Terraform module is a self-contained package of Terraform configurations that can be called and configured by other configurations. To use a Terraform module, you simply add it to your configuration using the module block.
+
+```tf
+module "vpc" {
+  source = "hashicorp/aws/vpc/aws"
+  version = "~> 3.0"
+
+  name = "my-vpc"
+  cidr = "10.0.0.0/16"
+}
+```
+
+### TERRAFORM PROVIDER
+Providers are available for a wide range of cloud providers, on-premises infrastructure, and other services.
+You can install providers using the terraform init command.
+
+### TERRAFORM INIT
+Running terraform init downloads terraform binaries, lockfile and statefile.
+NOTE: The **lockfile** should be pushed to versioning control, the **statefile** should not be pushed
+
+### TERRAFORM RESOURCE
+Resources are defined in Terraform configuration files using the resource block. The resource block specifies the type of resource, the provider that Terraform should use to manage the resource, and the properties of the resource.
+
+
+### TERRAFORM RANDOM PROVIDER
+The "random" provider allows the use of randomness within Terraform configurations. This is a logical provider, which means that it works entirely within Terraform's logic, and doesn't interact with any other services.
+
+### GENERATE A RANDOM TERRAFORM BUCKET NAME
+The provider to be used is the [random provider](https://registry.terraform.io/providers/hashicorp/random/latest/docs) and the resource to be used is random_string.
+
+
+
+
 
 [^1]:https://www.washington.edu/doit/technology-tips-chmod-overview
 [^2]:https://riptutorial.com/git/example/911/exceptions-in-a--gitignore-file
