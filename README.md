@@ -117,7 +117,7 @@ Get the list of environment variables with `env` and get a specific env vars wit
 Stop the currentspace to spin a new workspace confirm if your credentials are injected.
 
 ## GENERATING A RANDOM BUCKET NAME WITH TERRAFORM
-The [terraform registry](https://registry.terraform.io) is a public repository of Terraform modules and providers. Terraform uses to manage infrastructure resources.
+The [terraform registry](https://registry.terraform.io) is a public repository of Terraform modules and providers. Terraform uses to manage infrastructure resources. Run `terraform` to see the basic terraform commands.
 
 ### TERRAFORM MODULE
 A Terraform module is a self-contained package of Terraform configurations that can be called and configured by other configurations. To use a Terraform module, you simply add it to your configuration using the module block.
