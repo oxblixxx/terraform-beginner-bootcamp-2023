@@ -276,6 +276,9 @@ Manually put in your token in the folder
 nano /home/gitpod/.terraform.d/credentials/credentials.tfrc.json
 ```
 
+## ADD ALIAS FOR TF
+Google bard wrote a script to update `~/.bash_profile` with tf alias for terraform. Created a file in bin `tf_alias` and pasted the code there, tested it. Works smoothly. Update .gitpod.yml to automate the alias on spinning a new workspace.
+
 
 
 
