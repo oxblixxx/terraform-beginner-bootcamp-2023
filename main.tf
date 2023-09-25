@@ -11,9 +11,21 @@ terraform {
   }
 }
 
-provider "random" {
-  # Configuration options
+# TERRAFORM CLOUD INTERGRATION
+terraform {
+  cloud {
+    organization = "oxblixxx"
+
+    workspaces {
+      name = "aws-terraform"
+    }
+  }
 }
+
+
+#provider "random" {
+  # Configuration options
+#}
 
 
 resource "random_string" "bucket-name" {

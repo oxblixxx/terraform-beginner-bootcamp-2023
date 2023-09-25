@@ -167,6 +167,70 @@ The "random" provider allows the use of randomness within Terraform configuratio
 The provider to be used is the [random provider](https://registry.terraform.io/providers/hashicorp/random/latest/docs) and the resource to be used is random_string.
 
 
+## TERRAFORM CLOUD INTERGRATION
+Create a [terraform account](https://app.terraform.io/). Generate aN API token, by going to user settings and locate token. Create a new project and workspace, A project in Terraform Cloud is a container for workspaces. Every workspace needs to be a child of a project. Existing workspaces are automatically deployed in the Default Project workspace[^5]. 
+
+Update your .tf file to intergrate with Terraform cloud.
+
+```sh
+terraform {
+  cloud {
+    organization = "oxblixxx"
+
+    workspaces {
+      name = "aws-terraform"
+    }
+  }
+}
+```
+
+### DIFFICULTY WITH TERRAFORM LOGIN COMMAND
+
+While running `terraform login` I couldnt't login to authenticate. Google bard advised to create a .json file in this directory `/home/gitpod/.terraform.d/credentials.tfrc.json`
+
+
+```sh
+{
+  "credentials": {
+    "hostname": {
+      "token": "YOUR_AUTHENTICATION_TOKEN"
+    }
+  }
+}
+```
+
+If you get this error while running `terraform init`
+
+```sh
+Usage: terraform [global options] login [hostname]
+
+  Retrieves an authentication token for the given hostname, if it supports
+  automatic login, and saves it in a credentials file in your home directory.
+
+  If no hostname is provided, the default hostname is app.terraform.io, to
+  log in to Terraform Cloud.
+
+  If not overridden by credentials helper settings in the CLI configuration,
+  the credentials will be written to the following local file:
+      /home/gitpod/.terraform.d/credentials.tfrc.json
+```
+
+Change the `hostname` to `app.terraform.io`
+
+
+```
+{
+  "credentials": {
+    "app.terraform.io": {
+      "token": "1234567890abcdef0"
+    }
+  }
+}
+
+```
+
+Run `Terraform init` again and your infrastru
+
 
 
 
@@ -174,3 +238,4 @@ The provider to be used is the [random provider](https://registry.terraform.io/p
 [^2]:https://riptutorial.com/git/example/911/exceptions-in-a--gitignore-file
 [^3]:https://docs.aws.amazon.com/cli/latest/userguide/cli-authentication-user.html
 [^4]:https://www.gitpod.io/blog/securely-manage-development-secrets-with-doppler-and-gitpod
+[^5]:https://nedinthecloud.com/2023/02/09/terraform-cloud-managing-your-workspaces-with-projects/#:~:text=A%20project%20in%20Terraform%20Cloud,workspaces%20between%20projects%20as%20needed.
