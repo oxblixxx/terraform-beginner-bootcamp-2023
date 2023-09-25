@@ -116,8 +116,6 @@ gp env AWS_DEFAULT_REGION=us-east-1
 List all environment variables with `env` and you can fetch for a specific env vars with `env | grep AWS`
 
 
-
-
 Stop the currentspace to spin a new workspace confirm if your credentials are injected.
 
 [^1]:https://www.washington.edu/doit/technology-tips-chmod-overview
