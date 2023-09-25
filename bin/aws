@@ -1,0 +1,17 @@
+#! /usr/bin/bash
+
+# check if awscliv2.zip exist
+cd /workspace
+
+
+aws = $(awscliv2.zip)
+if [ -d $aws ]; then
+  rm -rf $aws
+  echo "$aws removed"
+fi
+
+curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"
+unzip awscliv2.zip
+sudo ./aws/install
+
+aws --version
