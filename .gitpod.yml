@@ -10,6 +10,7 @@ tasks:
       AWS_CLI_AUTO_PROMPT: on-partial
     init: |
       source /workspace/terraform-beginner-bootcamp-2023/bin/aws
+      source ~/.bash_profile
 vscode:
   extensions:
     - amazonwebservices.aws-toolkit-vscode
