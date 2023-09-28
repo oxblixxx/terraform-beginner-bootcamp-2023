@@ -15,3 +15,8 @@ variable "user-uuid" {
     error_message = "The name of the S3 bucket must be between 3 and 63 characters long."
   }
 }
+
+variable "private-ip" {
+  description = "webserver EC2 private ip"  
+}
+
