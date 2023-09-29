@@ -6,7 +6,7 @@ alias_name_apply=tfo
 
 # Get the new value of the alias
 new_value=terraform
-new_value_apply='terraform apply'
+new_value_apply='terraform apply --auto-approve'
 
 # Update the alias in the .bash_profile file
 echo "alias $alias_name='$new_value'" >> ~/.bash_profile

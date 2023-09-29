@@ -34,17 +34,35 @@ resource "aws_s3_bucket_website_configuration" "bootcamp_bucket_website" {
 
 # https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/s3_object
 resource "aws_s3_object" "bootcamp_bucket_object" {
-  bucket =  "bootcamp_bucket"
+  bucket =  aws_s3_bucket.bootcamp_bucket.bucket
   key    = "index.html"
-  source = "${path.root}/public/index.html"
+  source = "${path.root/index.html}"
 
   # The filemd5() function is available in Terraform 0.11.12 and later
   # For Terraform 0.11.11 and earlier, use the md5() function and the file() function:
   # etag = "${md5(file("path/to/file"))}"
   #etag = filemd5("path/to/file")
-  # depends_on = [aws_s3_bucket_acl.bootcamp_bucket, aws_s3_bucket_policy.bootcamp_bucket]
+   #depends_on = [aws_s3_bucket_policy.bootcamp_bucket]
 
 }
+
+resource "aws_s3_object" "bootcamp_bucket_object_error" {
+  bucket =  aws_s3_bucket.bootcamp_bucket.bucket
+  key    = "error.html"
+  source = "${path.root}/public/error.html"
+
+  # The filemd5() function is available in Terraform 0.11.12 and later
+  # For Terraform 0.11.11 and earlier, use the md5() function and the file() function:
+  # etag = "${md5(file("path/to/file"))}"
+  #etag = filemd5("path/to/file")
+   #depends_on = [aws_s3_bucket_policy.bootcamp_bucket]
+
+}
+
+
+
+
+
 
 
 
