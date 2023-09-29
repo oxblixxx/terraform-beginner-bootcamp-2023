@@ -1,4 +1,4 @@
-module "consul" {
+module "terrahouse_aws" {
   source = "./modules/terrahouse_aws"
   user-uuid = var.user-uuid
   environment = var.environment

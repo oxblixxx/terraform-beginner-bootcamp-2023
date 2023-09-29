@@ -133,3 +133,6 @@ module "consul" {
 }
 
 ```
+
+
+## UPLOADING OBEJCT TO S3
