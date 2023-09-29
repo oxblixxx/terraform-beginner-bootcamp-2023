@@ -15,3 +15,7 @@ variable "environment" {
 variable "user-uuid" {
   description = "Exampro user-uuid"
 }
+
+# variable "bootcamp_bucket_arn" {
+#   description = "bootcamp bucket arn"
+# }

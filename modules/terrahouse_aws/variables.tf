@@ -16,3 +16,6 @@ variable "user-uuid" {
   }
 }
 
+# variable "bootcamp_bucket_arn" {
+#   description = "bootcamp bucket arn"
+# }
