@@ -1,3 +1,3 @@
 output "bootcamp-bucket" {
-  value = aws_s3_bucket.bootcamp-bucket.bucket
+  value = module.consul.bootcamp-bucket
 }
