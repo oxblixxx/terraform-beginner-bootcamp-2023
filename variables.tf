@@ -19,3 +19,16 @@ variable "user-uuid" {
 variable "bootcamp_bucket_arn" {
   description = "bootcamp bucket arn"
 }
+
+
+variable "index_html_file_path" {
+  type = string
+  description = "file path to index.html file"
+}
+
+
+
+variable "error_html_file_path" {
+  type = string
+  description = "file path to index.html file"
+}

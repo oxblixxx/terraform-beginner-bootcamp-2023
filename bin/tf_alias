@@ -2,15 +2,19 @@
 
 # Get the name of the alias to update
 alias_name=tf
-alias_name_apply=tfo
+alias_name_apply=tfa
+alias_name_plan=tfp
+
 
 # Get the new value of the alias
 new_value=terraform
 new_value_apply='terraform apply --auto-approve'
+new_value_plan='terraform plan'
 
 # Update the alias in the .bash_profile file
 echo "alias $alias_name='$new_value'" >> ~/.bash_profile
 echo "alias $alias_name_apply='$new_value_apply'" >> ~/.bash_profile
+echo "alias $alias_name_plan='$new_value_plan'" >> ~/.bash_profile
 
 
 # Print a success message
