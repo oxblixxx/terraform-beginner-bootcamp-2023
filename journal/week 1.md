@@ -151,9 +151,12 @@ The etag attribute in Terraform is used to specify the entity tag (ETag) for an 
 etag = filemd5("${path.root}/path/to/file")
 ```
 
+### OBJECT VALIDATIION
+While uploading objects into the bucket, they can be validated if the file exists using the validation block and using the function `fileexists()[^3]`
 
 
 
 [^1]:https://developer.hashicorp.com/terraform/language/import/generating-configuration
 [^2]:https://developer.hashicorp.com/terraform/language/expressions/references#path-module
+[^3]:https://developer.hashicorp.com/terraform/language/functions/fileexists
 
