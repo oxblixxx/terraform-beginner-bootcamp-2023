@@ -156,6 +156,11 @@ While uploading objects into the bucket, they can be validated if the file exist
 
 
 
+### DATA SOURCES PROVIDER
+
+
+
+
 [^1]:https://developer.hashicorp.com/terraform/language/import/generating-configuration
 [^2]:https://developer.hashicorp.com/terraform/language/expressions/references#path-module
 [^3]:https://developer.hashicorp.com/terraform/language/functions/fileexists

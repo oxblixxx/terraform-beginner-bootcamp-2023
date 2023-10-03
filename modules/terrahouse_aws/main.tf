@@ -8,51 +8,10 @@ terraform {
   }
 }
 
-# https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/s3_bucket
-resource "aws_s3_bucket" "bootcamp_bucket" {
-  bucket = var.user-uuid
-
-  tags = {
-    Name        = var.name
-    Environment = var.environment
-  }
-}
 
 
-# https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/s3_bucket_website_configuration
-resource "aws_s3_bucket_website_configuration" "bootcamp_bucket_website" {
-  bucket = aws_s3_bucket.bootcamp_bucket.id
-
-  index_document {
-    suffix = "index.html"
-  }
-
-  error_document {
-    key = "error.html"
-  }
-}
-
-# https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/s3_object
-resource "aws_s3_object" "index_object" {
-  bucket =  aws_s3_bucket.bootcamp_bucket.bucket
-  key    = "index.html"
-  source = var.index_html_file_path
-
-  etag = filemd5(var.index_html_file_path)
-   #depends_on = [aws_s3_bucket_policy.bootcamp_bucket]
-
-}
-
-resource "aws_s3_object" "error_object" {
-  bucket =  aws_s3_bucket.bootcamp_bucket.bucket
-  key    = "error.html"
-  source = var.error_html_file_path
-
-
-  etag = filemd5(var.error_html_file_path)
-   #depends_on = [aws_s3_bucket_policy.bootcamp_bucket]
-
-}
+# https://registry.terraform.io/providers/hashicorp/aws/latest/docs/data-sources/caller_identity
+data "aws_caller_identity" "current" {}
 
 
 
