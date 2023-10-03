@@ -28,7 +28,7 @@ variable "index_html_file_path" {
 
 
 
-variable "error_html_file_path" {
+variable "error_html_filepath" {
   type = string
   description = "file path to index.html file"
 }

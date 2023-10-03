@@ -25,10 +25,10 @@ variable "index_html_file_path" {
   type = string
   description = "file path to index.html file"
 
-  validation {
-  condition = fileexists(var.index_html_file_path)
-  error_message = "file does not exist, please create one"  
-  }
+  # validation {
+  # condition = fileexists(var.index_html_file_path)
+  # error_message = "file does not exist, please create one"  
+  # }
 }
 
 
@@ -36,8 +36,8 @@ variable "error_html_file_path" {
   type = string
   description = "file path to error.html file"
 
-  validation {
-    condition = fileexists(var.error_html_file_path)
-    error_message = "file does not exist, please create one"  
-  }
+#  validation {
+#    condition = fileexists(var.error_html_file_path)
+#    error_message = "file does not exist, please create one"  
+#  }
 }

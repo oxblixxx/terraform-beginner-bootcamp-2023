@@ -160,6 +160,9 @@ While uploading objects into the bucket, they can be validated if the file exist
 
 
 
+### LOCALS
+
+
 
 [^1]:https://developer.hashicorp.com/terraform/language/import/generating-configuration
 [^2]:https://developer.hashicorp.com/terraform/language/expressions/references#path-module
