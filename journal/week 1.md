@@ -133,9 +133,11 @@ module "consul" {
 
 ```
 
+## CDN IMPLEMENTATION
+You can do this using the CloudFront console, the AWS CLI, or the AWS SDK. But we will automate using `Terraform`. When you create a distribution, you need to specify the origin server that you want to deliver content from. You can also specify other settings, such as the cache behavior and the TTL.
 
-## UPLOADING OBEJCT TO S3
-It's best practice to explore the documentation as `chatGPT` gives deprecated versions of resources. Uploading in the  `bucket` will be done with the `aws_s3_object` resource.
+### UPLOADING OBEJCT TO S3
+It's best practice to explore the documentation as `chatGPT` gives deprecated versions of resources. Uploading in the  `bucket` will be done with the [aws_s3_object](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/s3_object) resource of terraform.
 
 ### DATA SOURCES
 The path.module and path.root functions in Terraform are used to get the paths to the module and root directory of your Terraform configuration.
@@ -152,19 +154,51 @@ etag = filemd5("${path.root}/path/to/file")
 ```
 
 ### OBJECT VALIDATIION
-While uploading objects into the bucket, they can be validated if the file exists using the validation block and using the function `fileexists()[^3]`
-
-
+While uploading objects into the bucket, they can be validated if the file exists using the validation block and using the function `fileexists()` and if it does not exist a condition can be set with an error message to output[^3]`
 
 ### DATA SOURCES PROVIDER
+A data source provider in Terraform is a plugin that provides Terraform with the ability to retrieve information about external resources, such as cloud APIs, databases, or other configuration files. Data source providers are different from resource providers, which enable Terraform to manage and provision external resources.
 
-
+```
+data "aws_instance" "example" {
+  id = "i-1234567890abcdef0"
+}
+```
+The above block of code  is used to get the instance type of the EC2 instance then it can be referenced as data.aws_instancew.example.
 
 ### LOCALS
+
+Locals in Terraform are named values that can be assigned and used in your code. Locals are declared using a locals block. The block can contain any number of named values, which are assigned using the = operator. Locals can be used in any expression in Terraform, and they can be referenced using the local. prefix.
+
+```
+locals {
+  region = "us-east-1"
+  instance_type = "t2.micro"
+}
+```
+It can be referenced as below:
+```
+resource "aws_instance" "example" {
+  ami = "ami-01234567890abcdef0"
+  instance_type = local.instance_type
+  tags = {
+    Name = "Example Instance"
+    Region = local.region
+  }
+}
+```
+
+### ERROR FACED
+After succesfully deploying the infrastructure, I copied the distrubution domain name to display my html contents. Instead it downloaded the file. To fix this, login to AWS console, navigate to the created Cloudfront distribution, click on `invalidations`  create invalidation and this obejct path
+```
+/*
+```
+
+CloudFront invalidations are a way to remove objects from the CloudFront cache before their TTL (time to live) expires. This is useful when you need to make changes to your website or application and want to ensure that visitors see the latest version of your content.CloudFront invalidations are a way to remove objects from the CloudFront cache before their TTL (time to live) expires. This is useful when you need to make changes to your website or application and want to ensure that visitors see the latest version of your content. [^4]
 
 
 
 [^1]:https://developer.hashicorp.com/terraform/language/import/generating-configuration
 [^2]:https://developer.hashicorp.com/terraform/language/expressions/references#path-module
 [^3]:https://developer.hashicorp.com/terraform/language/functions/fileexists
-
+[^4]:https://christinavhastenrath.medium.com/how-to-manually-invalidate-aws-cloudfront-b36a2ab4e1be
