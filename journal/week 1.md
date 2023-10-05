@@ -156,6 +156,9 @@ etag = filemd5("${path.root}/path/to/file")
 ### OBJECT VALIDATIION
 While uploading objects into the bucket, they can be validated if the file exists using the validation block and using the function `fileexists()` and if it does not exist a condition can be set with an error message to output[^3]`
 
+### TERRAFORM FUNCTIONS
+There are various types of [fuctions in terraform](https://developer.hashicorp.com/terraform/language/functions). `Jsonencode` functions was used to encode a the `bucket policy` to a JSON string.
+
 ### DATA SOURCES PROVIDER
 A data source provider in Terraform is a plugin that provides Terraform with the ability to retrieve information about external resources, such as cloud APIs, databases, or other configuration files. Data source providers are different from resource providers, which enable Terraform to manage and provision external resources.
 
@@ -196,10 +199,38 @@ After succesfully deploying the infrastructure, I copied the distrubution domain
 
 CloudFront invalidations are a way to remove objects from the CloudFront cache before their TTL (time to live) expires. This is useful when you need to make changes to your website or application and want to ensure that visitors see the latest version of your content.CloudFront invalidations are a way to remove objects from the CloudFront cache before their TTL (time to live) expires. This is useful when you need to make changes to your website or application and want to ensure that visitors see the latest version of your content. 
 
-### The terraform_data Managed Resource Type
+## CONTENT VERSIONING
+Content versioning is a feature that allows you to track and manage changes to your content over time.
+
+### THE TERRAFORM_DATA MANAGED RESOURCE TYPE
+The [terraform_data managed](https://developer.hashicorp.com/terraform/language/resources/terraform-data) resource type is a special resource type that can be used to store values which need to follow a managed resource lifecycle, and for triggering provisioners when there is no other logical managed resource in which to place them. 
+`Plain data values such as Local Values and Input Variables don't have any side-effects to plan against and so they aren't valid in replace_triggered_by. You can use terraform_data's behavior of planning an action each time input changes to indirectly use a plain value to trigger replacement.`
+
+```
+variable "revision" {
+  default = 1
+}
+
+resource "terraform_data" "replacement" {
+  input = var.revision
+}
+
+# This resource has no convenient attribute which forces replacement,
+# but can now be replaced by any change to the revision variable value.
+resource "example_database" "test" {
+  lifecycle {
+    replace_triggered_by = [terraform_data.replacement]
+  }
+}
+```
 
 
 ### LIFECYCLE 
+
+The [lifecycle block](https://developer.hashicorp.com/terraform/language/meta-arguments/lifecycle) in Terraform is used to control the way that a resource is created, updated, and destroyed. The lifecycle block can be used to specify the following properties:
+- create_before_destroy: This property tells Terraform to create the new resource before destroying the old one. This can be useful for resources that need to be online continuously, such as load --  balancers and databases.
+- ignore_changes: This property tells Terraform to ignore changes to certain attributes of the resource. This can be useful for resources that have attributes that change frequently but do not affect the resource's behavior.
+- replace_triggered_by: This property tells Terraform to replace the resource whenever the specified attribute changes. This can be useful for resources that need to be updated whenever a related resource changes.
 
 
 [^1]:https://developer.hashicorp.com/terraform/language/import/generating-configuration
