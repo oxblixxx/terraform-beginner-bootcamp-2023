@@ -21,6 +21,12 @@ resource "aws_s3_bucket_website_configuration" "bootcamp_bucket_website" {
   }
 }
 
+# https://developer.hashicorp.com/terraform/language/resources/terraform-data
+resource "terraform_data" "content_version" {
+  input = var.content_version
+}
+
+
 # https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/s3_object
 resource "aws_s3_object" "index_object" {
   bucket =  aws_s3_bucket.bootcamp_bucket.bucket
@@ -29,7 +35,12 @@ resource "aws_s3_object" "index_object" {
   content_type = "text/html"
 
   etag = filemd5(var.index_html_file_path)
-   #depends_on = [aws_s3_bucket_policy.bootcamp_bucket]
+
+# https://developer.hashicorp.com/terraform/language/meta-arguments/lifecycle
+  lifecycle {
+    replace_triggered_by = [terraform_data.content_version]
+    ignore_changes = [etag]
+  }
 
 }
 
@@ -41,8 +52,6 @@ resource "aws_s3_object" "error_object" {
 
 
   etag = filemd5(var.error_html_file_path)
-   #depends_on = [aws_s3_bucket_policy.bootcamp_bucket]
-
 }
 
 
