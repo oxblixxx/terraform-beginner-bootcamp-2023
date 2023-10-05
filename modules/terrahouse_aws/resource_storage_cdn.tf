@@ -25,10 +25,10 @@ resource "aws_s3_bucket_website_configuration" "bootcamp_bucket_website" {
 resource "aws_s3_object" "index_object" {
   bucket =  aws_s3_bucket.bootcamp_bucket.bucket
   key    = "index.html"
-  source = "${path.root}/public/index.html"
+  source = var.index_html_file_path
   content_type = "text/html"
 
- # etag = filemd5(var.index_html_file_path)
+  etag = filemd5(var.index_html_file_path)
    #depends_on = [aws_s3_bucket_policy.bootcamp_bucket]
 
 }
@@ -36,11 +36,11 @@ resource "aws_s3_object" "index_object" {
 resource "aws_s3_object" "error_object" {
   bucket =  aws_s3_bucket.bootcamp_bucket.bucket
   key    = "error.html"
-  source = "${path.root}/public/error.html"
+  source = var.error_html_file_path
   content_type = "text/html"
 
 
-#  etag = filemd5(var.error_html_filepath)
+  etag = filemd5(var.error_html_file_path)
    #depends_on = [aws_s3_bucket_policy.bootcamp_bucket]
 
 }
