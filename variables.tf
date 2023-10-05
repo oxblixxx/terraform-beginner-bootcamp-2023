@@ -22,13 +22,20 @@ variable "bootcamp_bucket_arn" {
 
 
 variable "index_html_file_path" {
-  type = string
+  type        = string
   description = "file path to index.html file"
 }
 
 
 
 variable "error_html_file_path" {
-  type = string
+  type        = string
   description = "file path to index.html file"
+}
+
+
+
+variable "content_version" {
+  type        = number
+  description = "variable for lifecycle for positive interger"
 }

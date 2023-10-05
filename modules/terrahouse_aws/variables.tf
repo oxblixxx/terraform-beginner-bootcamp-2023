@@ -41,3 +41,13 @@ variable "error_html_file_path" {
    error_message = "file does not exist, please create one"  
  }
 }
+
+
+variable "content_version" {
+  type = number
+  validation {
+    condition = var.content_version > 0
+    error_message = "The positive_integer variable must be a positive integer greater than zero."
+  }
+}
+

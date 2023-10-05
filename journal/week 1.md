@@ -196,6 +196,10 @@ After succesfully deploying the infrastructure, I copied the distrubution domain
 
 CloudFront invalidations are a way to remove objects from the CloudFront cache before their TTL (time to live) expires. This is useful when you need to make changes to your website or application and want to ensure that visitors see the latest version of your content.CloudFront invalidations are a way to remove objects from the CloudFront cache before their TTL (time to live) expires. This is useful when you need to make changes to your website or application and want to ensure that visitors see the latest version of your content. 
 
+### The terraform_data Managed Resource Type
+
+
+### LIFECYCLE 
 
 
 [^1]:https://developer.hashicorp.com/terraform/language/import/generating-configuration
