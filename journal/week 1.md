@@ -189,12 +189,12 @@ resource "aws_instance" "example" {
 ```
 
 ### ERROR FACED
-After succesfully deploying the infrastructure, I copied the distrubution domain name to display my html contents. Instead it downloaded the file. To fix this, login to AWS console, navigate to the created Cloudfront distribution, click on `invalidations`  create invalidation and this obejct path
+After succesfully deploying the infrastructure, I copied the distrubution domain name to display my html contents. Instead it downloaded the file. To fix this, login to AWS console, navigate to the created Cloudfront distribution, click on `invalidations`  create invalidation and this obejct path [^4]
 ```
 /*
 ```
 
-CloudFront invalidations are a way to remove objects from the CloudFront cache before their TTL (time to live) expires. This is useful when you need to make changes to your website or application and want to ensure that visitors see the latest version of your content.CloudFront invalidations are a way to remove objects from the CloudFront cache before their TTL (time to live) expires. This is useful when you need to make changes to your website or application and want to ensure that visitors see the latest version of your content. [^4]
+CloudFront invalidations are a way to remove objects from the CloudFront cache before their TTL (time to live) expires. This is useful when you need to make changes to your website or application and want to ensure that visitors see the latest version of your content.CloudFront invalidations are a way to remove objects from the CloudFront cache before their TTL (time to live) expires. This is useful when you need to make changes to your website or application and want to ensure that visitors see the latest version of your content. 
 
 
 
