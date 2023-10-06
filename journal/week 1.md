@@ -232,6 +232,14 @@ The [lifecycle block](https://developer.hashicorp.com/terraform/language/meta-ar
 - ignore_changes: This property tells Terraform to ignore changes to certain attributes of the resource. This can be useful for resources that have attributes that change frequently but do not affect the resource's behavior.
 - replace_triggered_by: This property tells Terraform to replace the resource whenever the specified attribute changes. This can be useful for resources that need to be updated whenever a related resource changes.
 
+## CLOUDFRONT INVALIDATION
+
+### CLI INAVALIDATION OF CLOUDFRONT
+
+### PROVISIONER
+
+
+### local-exec and remote-exec
 
 [^1]:https://developer.hashicorp.com/terraform/language/import/generating-configuration
 [^2]:https://developer.hashicorp.com/terraform/language/expressions/references#path-module

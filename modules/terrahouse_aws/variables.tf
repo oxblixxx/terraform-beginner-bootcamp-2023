@@ -51,3 +51,12 @@ variable "content_version" {
   }
 }
 
+# variable "cdn_invalidate_path" {
+#   type = string
+#   description = "file path to cdn invalidate file"
+
+#   validation {
+#   condition = fileexists(var.cdn_invalidate_path)
+#   error_message = "file does not exist, please create one"  
+#   }
+# }

@@ -7,4 +7,5 @@ module "terrahouse_aws" {
   error_html_file_path = var.error_html_file_path
   index_html_file_path = var.index_html_file_path
   content_version      = var.content_version
+  # cdn_invalidate_path = var.cdn_invalidate_path
 }

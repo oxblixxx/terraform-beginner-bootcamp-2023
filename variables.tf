@@ -39,3 +39,8 @@ variable "content_version" {
   type        = number
   description = "variable for lifecycle for positive interger"
 }
+
+# variable "cdn_invalidate_path" {
+#   type = string
+#   description = "file path to cdn invalidate file"
+# }

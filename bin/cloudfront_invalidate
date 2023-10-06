@@ -1,0 +1,5 @@
+#! /usr/bin/bash
+
+
+aws cloudfront create-invalidation --distribution-id E1Z1N6IYB0FBU4 --all-paths
+echo "hello world"
