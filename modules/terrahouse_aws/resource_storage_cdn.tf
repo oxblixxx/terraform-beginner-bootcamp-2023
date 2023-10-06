@@ -56,7 +56,7 @@ resource "aws_s3_object" "error_object" {
 
 resource "aws_s3_object" "assets_object" {
   bucket =  aws_s3_bucket.bootcamp_bucket.bucket
-  key    =  "assets/each.key"
+  key    =  "assets/${each.key}"
   for_each = fileset(var.assets_path, "*.jpeg")
   source = "${var.assets_path}/${each.key}"
   #content_type = "text/html"
