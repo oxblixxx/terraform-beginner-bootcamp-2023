@@ -67,6 +67,7 @@ resource "aws_cloudfront_origin_access_control" "default" {
 }
 
 
+# https://developer.hashicorp.com/terraform/language/resources/terraform-data
 resource "terraform_data" "cdn_invalidate" {
   triggers_replace = terraform_data.content_version
 
