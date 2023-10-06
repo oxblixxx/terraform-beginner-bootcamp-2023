@@ -306,11 +306,60 @@ Operation failed:
 
 `NB: Reason for content versioning is because we don't want changes on our infrastructure everytime the etags changes but when we update var.content_version which should trigger the invalidations as well`
 
-### Uploading multiple files
+## Uploading multiple files
+To use the `aws_s3_object resource` to upload multiple files, you can use the for_each argument. The for_each argument allows you to iterate over a list of values and create a resource for each value in the list.
 
 ### FOR EACH
+The [for_each meta-argument](https://developer.hashicorp.com/terraform/language/meta-arguments/for_each) accepts a map or a set of strings, and creates an instance for each item in that map or set
+```
+# my_buckets.tf
+module "bucket" {
+  for_each = toset(["assets", "media"])
+  source   = "./publish_bucket"
+  name     = "${each.key}_bucket"
+}
+```
 
 ### FILESET
+[fileset](https://developer.hashicorp.com/terraform/language/functions/fileset) enumerates a set of regular file names given a path and pattern. It's a fucntion type for filesystem in `Terraform`
+
+```
+> fileset(path.module, "files/*.txt")
+[
+  "files/hello.txt",
+  "files/world.txt",
+]
+
+> fileset(path.module, "files/{hello,world}.txt")
+[
+  "files/hello.txt",
+  "files/world.txt",
+]
+
+> fileset("${path.module}/files", "*")
+[
+  "hello.txt",
+  "world.txt",
+]
+
+> fileset("${path.module}/files", "**")
+[
+  "hello.txt",
+  "world.txt",
+  "subdirectory/anotherfile.txt",
+]
+
+```
+
+### TERRAFORM CONSOLE
+
+The Terraform console is a tool that allows you to interactively explore your Terraform state and evaluate Terraform expressions. It is useful for debugging and understanding how Terraform works.
+
+To start the Terraform console, you can run the following command:
+
+```
+terraform console
+```
 
 
 
