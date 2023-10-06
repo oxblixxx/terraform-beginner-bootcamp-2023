@@ -67,3 +67,12 @@ resource "aws_cloudfront_origin_access_control" "default" {
 }
 
 
+# https://developer.hashicorp.com/terraform/language/resources/terraform-data
+resource "terraform_data" "cdn_invalidate" {
+  triggers_replace = terraform_data.content_version
+
+ provisioner "local-exec" {
+  command = "aws cloudfront create-invalidation --distribution-id ${aws_cloudfront_distribution.s3_distribution.id} --paths '/*'"
+}
+
+}

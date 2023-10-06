@@ -232,6 +232,79 @@ The [lifecycle block](https://developer.hashicorp.com/terraform/language/meta-ar
 - ignore_changes: This property tells Terraform to ignore changes to certain attributes of the resource. This can be useful for resources that have attributes that change frequently but do not affect the resource's behavior.
 - replace_triggered_by: This property tells Terraform to replace the resource whenever the specified attribute changes. This can be useful for resources that need to be updated whenever a related resource changes.
 
+## AUTOMATING CLOUDFRONT INVALIDATION
+
+### CLI INAVALIDATION OF CLOUDFRONT
+Invalidation of cloudfront can be done through AWS CLI command. Using Terraform isn't best practices to do it, `configuration mangement tools` like Ansible can be used. The AWS CLI command to run is
+```
+aws cloudfront create-invalidation --distribution-id YOUR_DISTRIBUTION_ID --paths '/*'
+```
+
+### PROVISIONER
+
+Terraform provisioners are a way to execute commands on remote resources after they have been created. This can be useful for a variety of tasks, such as installing software, configuring applications, and deploying infrastructure. `Terraform data` is a replacement of `Nulll resource`
+
+
+```
+variable "revision" {
+  default = 1
+}
+
+
+resource "terraform_data" "replacement" {
+  input = var.revision  
+}
+
+# This resource has no convenient attribute which forces replacement,
+# but can now be replaced by any change to the revision variable value.
+resource "example_database" "test" {
+  lifecycle {
+    replace_triggered_by = [terraform_data.replacement]
+  }
+   provisioner "local-exec" {
+    command = "bootstrap-hosts.sh"
+  }
+}
+
+```
+
+### local-exec and remote-exec
+- Local-exec: This provisioner executes commands on the local machine where Terraform is running.
+- Remote-exec: This provisioner executes commands on a remote resource, such as an EC2 instance or Kubernetes cluster.
+
+### ERROR
+I hardcode the `distribution ID` I got an error, fixed it by passing in `--distribution-id ${aws_cloudfront_distribution.s3_distribution.id}` and changing `--all-paths` to `paths`
+```
+Error: local-exec provisioner error
+│ 
+│  with module.terrahouse_aws.terraform_data.cdn_invalidate,
+│  on modules/terrahouse_aws/resource_cdn.tf line 73, in resource "terraform_data" "cdn_invalidate":
+│  73:  provisioner "local-exec" {
+│ 
+│ Error running command '  aws cloudfront create-invalidation \
+│   --distribution-id E421N6I3204BU4 \ 
+│   --all-paths '/*'
+Note: AWS CLI version 2, the latest: 
+│ major version of the AWS CLI, is now stable and recommended for general
+│ use. For more information, see the AWS CLI version 2 installation
+│ instructions at:
+│ https://docs.aws.amazon.com/cli/latest/userguide/install-cliv2.html
+│ 
+│ usage: aws [options] <command> <subcommand> [<subcommand> ...] [parameters]
+│ To see help text, you can run:
+│ 
+│  aws help
+│  aws <command> help
+│  aws <command> <subcommand> help
+│ 
+│ Unknown options:  
+│ /bin/sh: 3: --all-paths: not found
+│ 
+╵
+Operation failed:
+```
+
+`NB: Reason for content versioning is because we don't want changes on our infrastructure everytime the etags changes but when we update var.content_version which should trigger the invalidations as well`
 
 [^1]:https://developer.hashicorp.com/terraform/language/import/generating-configuration
 [^2]:https://developer.hashicorp.com/terraform/language/expressions/references#path-module
