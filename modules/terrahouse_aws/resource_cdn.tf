@@ -70,11 +70,8 @@ resource "aws_cloudfront_origin_access_control" "default" {
 resource "terraform_data" "cdn_invalidate" {
   triggers_replace = terraform_data.content_version
 
-  provisioner "local-exec" {
-    command = <<EOF
-    aws cloudfront create-invalidation \
-    --distribution-id E1Z1N6IYB0FBU4 \ 
-    --all-paths /*
-    EOF  
-  }
+ provisioner "local-exec" {
+  command = "aws cloudfront create-invalidation --distribution-id ${aws_cloudfront_distribution.s3_distribution.id} --paths '/*'"
+}
+
 }

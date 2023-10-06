@@ -9,3 +9,8 @@ output "bootcamp-bucket_Website_domain" {
 output "cdn_s3_distribution_id" {
   value = aws_cloudfront_distribution.s3_distribution.id
 }
+
+
+output "cdn_s3_distribution_domain" {
+  value = aws_cloudfront_distribution.s3_distribution.domain_name
+}
