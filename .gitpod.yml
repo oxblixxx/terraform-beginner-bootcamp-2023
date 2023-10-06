@@ -13,7 +13,12 @@ tasks:
     before: |
       source /workspace/terraform-beginner-bootcamp-2023/bin/aws
       source ~/.bash_profile
+  - name: http-server
+    before: |
       npm install --global http-server
+    command: 
+      http-server
+
 vscode:
   extensions:
     - amazonwebservices.aws-toolkit-vscode

@@ -60,3 +60,8 @@ variable "content_version" {
 #   error_message = "file does not exist, please create one"  
 #   }
 # }
+
+variable "assets_path" {
+  type = string
+  description = "path to assets to upload"
+}

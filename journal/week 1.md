@@ -306,6 +306,14 @@ Operation failed:
 
 `NB: Reason for content versioning is because we don't want changes on our infrastructure everytime the etags changes but when we update var.content_version which should trigger the invalidations as well`
 
+### Uploading multiple files
+
+### FOR EACH
+
+### FILESET
+
+
+
 [^1]:https://developer.hashicorp.com/terraform/language/import/generating-configuration
 [^2]:https://developer.hashicorp.com/terraform/language/expressions/references#path-module
 [^3]:https://developer.hashicorp.com/terraform/language/functions/fileexists

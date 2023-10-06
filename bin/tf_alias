@@ -10,8 +10,8 @@ alias_name_apply=tfa
 # Get the new value of the alias
 new_value=terraform
 new_value_init='terraform init'
-new_value_plan='terraform plan'
-new_value_apply='terraform apply --auto-approve'
+new_value_plan='terraform plan -var-file=variables.tfvars'
+new_value_apply='terraform apply --auto-approve -var-file=variables.tfvars'
 
 
 # Update the alias in the .bash_profile file
