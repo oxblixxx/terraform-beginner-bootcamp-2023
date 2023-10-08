@@ -44,3 +44,9 @@ variable "content_version" {
 #   type = string
 #   description = "file path to cdn invalidate file"
 # }
+
+
+variable "assets_path" {
+  type = string
+  description = "path to assets to upload"
+}

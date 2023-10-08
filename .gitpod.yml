@@ -1,17 +1,24 @@
 tasks:
   - name: terraform
-    init: |
+    before: |
       source /workspace/terraform-beginner-bootcamp-2023/bin/terraform
       source /workspace/terraform-beginner-bootcamp-2023/bin/create_credentials_trfc
       source /workspace/terraform-beginner-bootcamp-2023/bin/tf_alias
+      cp /workspace/terraform-beginner-bootcamp-2023/terraform.tfvars.example /workspace/terraform-beginner-bootcamp-2023/variables.tfvars
       source ~/.bash_profile
-      cp terraform.tfvars.example /workspace/terraform-beginner-bootcamp-2023/variables.tfvars
+      nano /home/gitpod/.terraform.d/credentials.tfrc.json
   - name: aws-cli
     env:
       AWS_CLI_AUTO_PROMPT: on-partial
-    init: |
+    before: |
       source /workspace/terraform-beginner-bootcamp-2023/bin/aws
       source ~/.bash_profile
+  - name: http-server
+    before: |
+      npm install --global http-server
+    command: 
+      http-server
+
 vscode:
   extensions:
     - amazonwebservices.aws-toolkit-vscode
