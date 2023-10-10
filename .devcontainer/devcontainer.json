@@ -1,0 +1,6 @@
+{
+    "name": "Terraform Codespace",
+    "extensions": ["amazonwebservices.aws-toolkit-vscode", "hashicorp.terraform"],
+    "postCreateCommand": "/workspace/terraform-beginner-bootcamp-2023/bin/setup_codespace.sh"
+  }
+  
