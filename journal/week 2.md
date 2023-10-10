@@ -1,5 +1,4 @@
 
-
 # Terraform Beginner Bootcamp 2023 - Week 2
 
 ## WORKING WITH RUBY
@@ -24,11 +23,16 @@ gem install rails
 When running Ruby scripts in the context of Bundler, you want to make sure that your script uses the gems specified in your Gemfile. Here are the steps to run a Ruby script with Bundler:
 Pass the script name to the ruby command:
 
-bundle exec ruby [script_file_name
+bundle exec ruby [script_file_name]
 ### SINATRA
 
 [Sinatra](https://sinatrarb.com/) is a lightweight and flexible web application framework written in Ruby. It is often referred to as a micro-framework because of its simplicity and minimalistic design. Despite its size, Sinatra is powerful and well-suited for building small to medium-sized web applications and APIs. Here are some key features and aspects of Sinatra:
 
+
+### INSTALL GEMS
+
+
+### EXECUCTING RUBY SCRIPTS IN THE CONTEXT OF BUNDLER
 
 ## TERRATOWNS MOCK SERVER
 
@@ -39,5 +43,5 @@ We can run the web server by executing the following commands:
 bundle install
 bundle exec ruby server.rb
 ```
-
 All of the code for our server is stored in the `server.rb` file.
+
