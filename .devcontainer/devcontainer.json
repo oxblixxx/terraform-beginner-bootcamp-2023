@@ -1,34 +1,5 @@
-// {
-//     "name": "Terraform Codespace",
-//     "extensions": ["amazonwebservices.aws-toolkit-vscode", "hashicorp.terraform"],
-//     "postCreateCommand": "/workspaces/terraform-beginner-bootcamp-2023/bin/setup_codespace.sh"
-//   }
-  
-{
-  "name": "Terraform Beginner Bootcamp",
-  "extensions": ["amazonwebservices.aws-toolkit-vscode", "hashicorp.terraform"],
-  "runArgs": [
-    "--volume",
-    "/workspaces/terraform-beginner-bootcamp-2023:/workspaces/terraform-beginner-bootcamp-2023"
-  ],
-  "tasks": [
-    {
-      "name": "terraform",
-      "command": "/bin/bash",
-      "args": ["-c", "source /workspaces/terraform-beginner-bootcamp-2023/bin/terraform && source /workspaces/terraform-beginner-bootcamp-2023/bin/create_credentials_trfc && source /workspace/terraform-beginner-bootcamp-2023/bin/tf_alias && cp /workspace/terraform-beginner-bootcamp-2023/terraform.tfvars.example /workspace/terraform-beginner-bootcamp-2023/variables.tfvars && source ~/.bash_profile && nano /home/codespace/.terraform.d/credentials.tfrc.json"]
-    },
-    {
-      "name": "aws-cli",
-      "env": {"AWS_CLI_AUTO_PROMPT": "on-partial"},
-      "command": "/bin/bash",
-      "args": ["-c", "source /workspaces/terraform-beginner-bootcamp-2023/bin/aws && source ~/.bash_profile"]
-    },
-    {
-      "name": "http-server",
-      "command": "npm",
-      "args": ["install", "--global", "http-server"]
-    }
-  ],
-  "postCreateCommand": "npm install",
-  "remoteUser": "codespace"
-}
+ {
+     "name": "Terraform Codespace",
+     "extensions": ["amazonwebservices.aws-toolkit-vscode", "hashicorp.terraform"],
+     "postCreateCommand": "/workspaces/terraform-beginner-bootcamp-2023/bin/setup_codespace.sh"
+   }
