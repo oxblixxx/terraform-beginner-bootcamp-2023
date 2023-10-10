@@ -3,19 +3,32 @@ require 'json'
 require 'pry'
 require 'active_model'
 
+
+# Global variable
 $home = {}
 
+
+# This is a ruby class, representing home resource
 class Home
+  #Activemodel 
   include ActiveModel::Validations
+  # create virtual attr.
   attr_accessor :town, :name, :description, :domain_name, :content_version
 
-  validates :town, presence: true
+  validates :town, presence: true, inclusion: { in: [
+    'video-valley',
+    'cooker-cave',
+    'melomaniac-mansion',
+    'the-nommad-pad',
+    'gamers-grotto'
+  ]}
   validates :name, presence: true
   validates :description, presence: true
+  # lock to our cloudfront domain
   validates :domain_name, 
     format: { with: /\.cloudfront\.net\z/, message: "domain must be from .cloudfront.net" }
     # uniqueness: true, 
-
+  # content version and has to be an interger
   validates :content_version, numericality: { only_integer: true }
 end
 
@@ -40,11 +53,11 @@ class TerraTownsMockServer < Sinatra::Base
   end
 
   def x_access_code
-    '9b49b3fb-b8e9-483c-b703-97ba88eef8e0'
+    return '9b49b3fb-b8e9-483c-b703-97ba88eef8e0'
   end
 
   def x_user_uuid
-    'e328f4ab-b99f-421c-84c9-4ccea042c7d1'
+    return 'e328f4ab-b99f-421c-84c9-4ccea042c7d1'
   end
 
   def find_user_by_bearer_token
@@ -69,8 +82,9 @@ class TerraTownsMockServer < Sinatra::Base
 
   # CREATE
   post '/api/u/:user_uuid/homes' do
-    ensure_correct_headings
-    find_user_by_bearer_token
+    ensure_correct_headings()
+    find_user_by_bearer_token()
+    # put prints to the terminal
     puts "# create - POST /api/homes"
 
     begin
@@ -86,6 +100,7 @@ class TerraTownsMockServer < Sinatra::Base
     content_version = payload["content_version"]
     town = payload["town"]
 
+    # Printing the variables
     puts "name #{name}"
     puts "description #{description}"
     puts "domain_name #{domain_name}"
@@ -99,6 +114,7 @@ class TerraTownsMockServer < Sinatra::Base
     home.domain_name = domain_name
     home.content_version = content_version
     
+    # ensure our validations check passas jsom
     unless home.valid?
       error 422, home.errors.messages.to_json
     end
@@ -134,6 +150,7 @@ class TerraTownsMockServer < Sinatra::Base
   end
 
   # UPDATE
+
   put '/api/u/:user_uuid/homes/:uuid' do
     ensure_correct_headings
     find_user_by_bearer_token
@@ -148,7 +165,6 @@ class TerraTownsMockServer < Sinatra::Base
     # Validate payload data
     name = payload["name"]
     description = payload["description"]
-    domain_name = payload["domain_name"]
     content_version = payload["content_version"]
 
     unless params[:uuid] == $home[:uuid]
@@ -157,9 +173,9 @@ class TerraTownsMockServer < Sinatra::Base
 
     home = Home.new
     home.town = $home[:town]
+    home.domain_name = $home[:domain_name]
     home.name = name
     home.description = description
-    home.domain_name = domain_name
     home.content_version = content_version
 
     unless home.valid?
@@ -180,9 +196,13 @@ class TerraTownsMockServer < Sinatra::Base
       error 404, "failed to find home with provided uuid and bearer token"
     end
 
+    # delete from mock database
+    uuid = $home[:uuid]
     $home = {}
-    { message: "House deleted successfully" }.to_json
+    { uuid: uuid }.to_json
   end
 end
 
+
+# run server
 TerraTownsMockServer.run!
