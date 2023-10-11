@@ -37,7 +37,12 @@ bundle exec ruby [script_file_name]
 ## TERRATOWNS MOCK SERVER
 
 ### RUNNING THE WEB SERVER
-
+We can run the web server by executing the following commands:
+```
+bundle install
+bundle exec ruby server.rb
+```
+All of the code for our server is stored in the `server.rb` file.
 
 ##TERRAFORM-PROVIDER-TERRATOWS
 
@@ -430,28 +435,71 @@ Create a script in /bin folder to build the provider:
 ```sh
 #! /usr/bin/bash
 
+#! /usr/bin/bash
+
 PLUGIN_DIR="/home/codespace/.terraform.d/plugins/local.providers/local/terratowns/1.0.0/"
 PLUGIN_NAME="terraform-provider-terratowns_v1.0.0"
 
 # https://servian.dev/terraform-local-providers-and-registry-mirror-configuration-b963117dfffa
 cp "$PROJECT_ROOT/template/terraformrc" "/home/codespace/.terraformrc"
-cd "$PROJECT_ROOT/terraform-provider-terratowns" && go mod init
-rm -rf "/home/codespace/.terraform.d/plugins"
-rm -rf $PROJECT_ROOT/.terraform
-rm -rf $PROJECT_ROOT/.terraform.lock.hcl
-go build -o $PLUGIN_NAME
-mkdir -p $PLUGIN_DIR/x86_64/
-mkdir -p $PLUGIN_DIR/linux_amd64/
-cp $PLUGIN_NAME $PLUGIN_DIR/x86_64
-cp $PLUGIN_NAME $PLUGIN_DIR/linux_amd64
+cd "$PROJECT_ROOT/terraform-provider-terratowns"
+sudo rm -rf "/home/codespace/.terraform.d/plugins"
+sudo rm -rf $PROJECT_ROOT/.terraform
+sudo rm -rf $PROJECT_ROOT/.terraform.lock.hcl
+go build -o "$PLUGIN_NAME"
+sudo mkdir -p "$PLUGIN_DIR/x86_64/"
+sudo mkdir -p "$PLUGIN_DIR/linux_amd64/"
+sudo cp $PLUGIN_NAME "$PLUGIN_DIR/x86_64"
+sudo cp "$PLUGIN_NAME" "$PLUGIN_DIR/linux_amd64"
 ```
 
 NB: THE DIRECTORY TO YOUR FOLDER PATH WILL BE DEIFFERENT, I HAVE MY PROJECT SPINNED UP GITHUB CODESPACES
-=======
-We can run the web server by executing the following commands:
-```
-bundle install
-bundle exec ruby server.rb
-```
-All of the code for our server is stored in the `server.rb` file.
 
+Make the binary file above executable:
+
+```sh
+chmod u+x build_provider
+```
+
+Run the script to see if there is any error:
+```sh
+./build_provider
+```
+
+Confirm if the files are copied to it's right  directory.
+
+From our previous `.tf` files in $PROJECT_ROOT. Comment them out:
+```tf
+output.tf
+variables.tf
+main.tf
+provider.tf
+```
+
+Define a provider for `terratowns` and set it's endpoint, user_uuid && token.
+
+```sh
+terraform {
+  required_providers {
+    terratowns = {
+      source  = "local.providers/local/terratowns"
+      version = "1.0.0"
+    }
+  }
+}
+
+provider "terratowns" {
+    endpoint = "http://localhost:4567"
+    user_uuid="e328f4ab-b99f-421c-84c9-4ccea042c7d1" 
+    token="9b49b3fb-b8e9-483c-b703-97ba88eef8e0"
+
+}
+```
+
+Run  `terraform init`, if all is done properly there should be no errors. Run `terraform apply` to create `.state` file.
+
+To see detailed debugs, run:
+
+```sh
+TF_LOG=DEB terraform init
+```

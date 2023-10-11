@@ -1,6 +1,8 @@
+
 # variable "private-ip" {
 #   description = "webserver EC2 private ip"  
 # }
+/*
 
 variable "name" {
   type        = string
@@ -50,3 +52,4 @@ variable "assets_path" {
   type = string
   description = "path to assets to upload"
 }
+*/
