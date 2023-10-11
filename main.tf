@@ -1,3 +1,4 @@
+/*
 module "terrahouse_aws" {
   source               = "./modules/terrahouse_aws"
   user-uuid            = var.user-uuid
@@ -10,3 +11,4 @@ module "terrahouse_aws" {
   assets_path = var.assets_path
   # cdn_invalidate_path = var.cdn_invalidate_path
 }
+*/
