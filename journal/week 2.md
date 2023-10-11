@@ -402,3 +402,26 @@ go get github.com/hashicorp/terraform-plugin-sdk/v2/plugin
 
 
 Check your `go.mod` file, it should have the packages downloaded in a `require block` and there should be newly created files  `go.sum` and `terraform-provider-terratowns_v1.0.0`
+
+Create a script in /bin folder to build the provider:
+
+```sh
+#! /usr/bin/bash
+
+PLUGIN_DIR="/home/codespace/.terraform.d/plugins/local.providers/local/terratowns/1.0.0/"
+PLUGIN_NAME="terraform-provider-terratowns_v1.0.0"
+
+# https://servian.dev/terraform-local-providers-and-registry-mirror-configuration-b963117dfffa
+cp "$PROJECT_ROOT/template/terraformrc" "/home/codespace/.terraformrc"
+cd "$PROJECT_ROOT/terraform-provider-terratowns" && go mod init
+rm -rf "/home/codespace/.terraform.d/plugins"
+rm -rf $PROJECT_ROOT/.terraform
+rm -rf $PROJECT_ROOT/.terraform.lock.hcl
+go build -o $PLUGIN_NAME
+mkdir -p $PLUGIN_DIR/x86_64/
+mkdir -p $PLUGIN_DIR/linux_amd64/
+cp $PLUGIN_NAME $PLUGIN_DIR/x86_64
+cp $PLUGIN_NAME $PLUGIN_DIR/linux_amd64
+```
+
+NB: THE DIRECTORY TO YOUR FOLDER PATH WILL BE DEIFFERENT, I HAVE MY PROJECT SPINNED UP GITHUB CODESPACES
