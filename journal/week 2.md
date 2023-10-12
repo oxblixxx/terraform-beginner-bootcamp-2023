@@ -503,3 +503,6 @@ To see detailed debugs, run:
 ```sh
 TF_LOG=DEB terraform init
 ```
+
+### CRUD
+
