@@ -1,5 +1,31 @@
- {
-     "name": "Terraform Codespace",
-     "extensions": ["amazonwebservices.aws-toolkit-vscode", "hashicorp.terraform"],
-     "postCreateCommand": "/workspaces/terraform-beginner-bootcamp-2023/bin/setup_codespace.sh"
-   }
+{
+  "name": "Terraform",
+  "extensions": ["hashicorp.terraform"],
+  "preCreateCommand": [
+                        "/workspaces/terraform-beginner-bootcamp-2023/bin/terraform.sh",
+                        "source '/workspaces/terraform-beginner-bootcamp-2023/bin/create_credentials_trfc'"
+                      ],
+  "postCreateCommand":  [
+                       "source '/workspaces/terraform-beginner-bootcamp-2023/bin/tf_alias'",
+                       "cp '/workspaces/terraform-beginner-bootcamp-2023/terraform.tfvars.example' '/workspaces/terraform-beginner-bootcamp-2023/variables.tfvars'",
+                       "source ~/.bash_profile"
+
+  ]
+}
+{
+  "name": "AWS",
+  "extensions": ["amazonwebservices.aws-toolkit-vscode"],
+  "preCreateCommand": "/workspaces/terraform-beginner-bootcamp-2023/bin/setup-aws.sh",
+  "postCreateCommand": "/workspaces/terraform-beginner-bootcamp-2023/bin/aws.sh"
+},
+{
+  "name": "http-server",
+  "preCreateCommand": "npm install --global http-server",
+  "postCreateCommand": "http-server"
+},
+{
+  "name": "credentials",
+  "postCreateCommand": "nano /home/codespace/.terraform.d/credentials.tfrc.json"
+}
+
+
