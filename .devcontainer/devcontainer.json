@@ -1,28 +1,39 @@
+// .devcontainer/devcontainer.json
+
 {
-  "name": "Terraform",
-  "extensions": ["hashicorp.terraform"],
-  "preCreateCommand": [
-    "/workspaces/terraform-beginner-bootcamp-2023/bin/terraform.sh",
-    "source '/workspaces/terraform-beginner-bootcamp-2023/bin/create_credentials_trfc'"
-  ],
-  "postCreateCommand": [
-    "source '/workspaces/terraform-beginner-bootcamp-2023/bin/tf_alias'",
-    "cp '/workspaces/terraform-beginner-bootcamp-2023/terraform.tfvars.example' '/workspaces/terraform-beginner-bootcamp-2023/variables.tfvars'",
-    "source ~/.bash_profile"
+  "name": "Your Dev Container",
+  "extensions": ["amazonwebservices.aws-toolkit-vscode", "hashicorp.terraform"],
+  "services": [
+    {
+      "name": "AWS",
+      "image": "your-custom-aws-image",
+      "postCreateCommand": ["/bin/bash", "/workspaces/terraform-beginner-bootcamp-2023/bin/setup-aws.sh"]
+    },
+    {
+      "name": "Terraform",
+      "image": "your-custom-terraform-image",
+      "postCreateCommand": [
+        "/bin/bash",
+        "/workspaces/terraform-beginner-bootcamp-2023/bin/terraform.sh",
+        "source '/workspaces/terraform-beginner-bootcamp-2023/bin/create_credentials_trfc'",
+        "source '/workspaces/terraform-beginner-bootcamp-2023/bin/tf_alias'",
+        "cp '/workspaces/terraform-beginner-bootcamp-2023/terraform.tfvars.example' '/workspaces/terraform-beginner-bootcamp-2023/variables.tfvars'",
+        "source ~/.bash_profile"
+      ]
+    },
+    {
+      "name": "HTTP-Server",
+      "image": "your-custom-http-server-image",
+      "runArgs": ["-v", "${PWD}:/workspace"],
+      "postCreateCommand": [
+        "/bin/bash",
+        "-c",
+        "apt-get update && apt-get install -y nodejs npm && npm install --global http-server && http-server"
+      ]
+    },
+    {
+      "name": "Credentials",
+      "postCreateCommand": ["nano", "/home/codespace/.terraform.d/credentials.tfrc.json"]
+    }
   ]
-},
-{
-  "name": "AWS",
-  "extensions": ["amazonwebservices.aws-toolkit-vscode"],
-  "preCreateCommand": "/workspaces/terraform-beginner-bootcamp-2023/bin/setup-aws.sh",
-  "postCreateCommand": "/workspaces/terraform-beginner-bootcamp-2023/bin/aws.sh"
-},
-{
-  "name": "http-server",
-  "preCreateCommand": "npm install --global http-server",
-  "postCreateCommand": "http-server"
-},
-{
-  "name": "credentials",
-  "postCreateCommand": "nano /home/codespace/.terraform.d/credentials.tfrc.json"
 }
