@@ -2,16 +2,15 @@
   "name": "Terraform",
   "extensions": ["hashicorp.terraform"],
   "preCreateCommand": [
-                        "/workspaces/terraform-beginner-bootcamp-2023/bin/terraform.sh",
-                        "source '/workspaces/terraform-beginner-bootcamp-2023/bin/create_credentials_trfc'"
-                      ],
-  "postCreateCommand":  [
-                       "source '/workspaces/terraform-beginner-bootcamp-2023/bin/tf_alias'",
-                       "cp '/workspaces/terraform-beginner-bootcamp-2023/terraform.tfvars.example' '/workspaces/terraform-beginner-bootcamp-2023/variables.tfvars'",
-                       "source ~/.bash_profile"
-
+    "/workspaces/terraform-beginner-bootcamp-2023/bin/terraform.sh",
+    "source '/workspaces/terraform-beginner-bootcamp-2023/bin/create_credentials_trfc'"
+  ],
+  "postCreateCommand": [
+    "source '/workspaces/terraform-beginner-bootcamp-2023/bin/tf_alias'",
+    "cp '/workspaces/terraform-beginner-bootcamp-2023/terraform.tfvars.example' '/workspaces/terraform-beginner-bootcamp-2023/variables.tfvars'",
+    "source ~/.bash_profile"
   ]
-}
+},
 {
   "name": "AWS",
   "extensions": ["amazonwebservices.aws-toolkit-vscode"],
@@ -27,5 +26,3 @@
   "name": "credentials",
   "postCreateCommand": "nano /home/codespace/.terraform.d/credentials.tfrc.json"
 }
-
-
