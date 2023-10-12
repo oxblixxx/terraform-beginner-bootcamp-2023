@@ -506,3 +506,17 @@ TF_LOG=DEB terraform init
 
 ### CRUD
 
+
+
+### ERRORS
+```
+╷
+│ Error: Post "http://localhost:4567/api/u/e328f4ab-b99f-421c-84c9-4ccea042c7d1/homes": dial tcp [::1]:4567: connect: connection refused
+│ 
+│   with terratowns_home.home,
+│   on main.tf line 16, in resource "terratowns_home" "home":
+│   16: resource "terratowns_home" "home" {
+│ 
+╵
+```
+

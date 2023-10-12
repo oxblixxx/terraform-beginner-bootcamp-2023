@@ -6,12 +6,12 @@
   "services": [
     {
       "name": "AWS",
-      "image": "your-custom-aws-image",
+      "image": "amazon/aws-cli",
       "postCreateCommand": ["/bin/bash", "/workspaces/terraform-beginner-bootcamp-2023/bin/setup-aws.sh"]
     },
     {
       "name": "Terraform",
-      "image": "your-custom-terraform-image",
+      "image": "hashicorp/terraform",
       "postCreateCommand": [
         "/bin/bash",
         "/workspaces/terraform-beginner-bootcamp-2023/bin/terraform.sh",
@@ -23,12 +23,12 @@
     },
     {
       "name": "HTTP-Server",
-      "image": "your-custom-http-server-image",
+      "image": "node",
       "runArgs": ["-v", "${PWD}:/workspace"],
       "postCreateCommand": [
         "/bin/bash",
         "-c",
-        "apt-get update && apt-get install -y nodejs npm && npm install --global http-server && http-server"
+        "apt-get update && apt-get install -y npm && npm install --global http-server && http-server"
       ]
     },
     {

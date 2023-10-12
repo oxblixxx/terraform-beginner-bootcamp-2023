@@ -9,3 +9,21 @@
 
 ## EXTRAS
 - [Markdown TOC Generator](https://derlin.github.io/bitdowntoc/)
+
+
+### RUNNING TERRAFORM PROVIDER TERRATOWNS
+cd into /workspaces/terraform-beginner-bootcamp-2023/terratowns_mock_server
+run
+
+```
+bundle install
+bundle exec ruby server.rb
+```
+
+cd into /bin, run
+
+```
+./build-provider
+```
+
+then you can run apply
