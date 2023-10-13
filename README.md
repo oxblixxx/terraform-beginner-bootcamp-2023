@@ -13,17 +13,26 @@
 
 ### RUNNING TERRAFORM PROVIDER TERRATOWNS
 cd into /workspaces/terraform-beginner-bootcamp-2023/terratowns_mock_server
-run
+run, this spins up `sinatra` hosted one port 4567
 
 ```
 bundle install
 bundle exec ruby server.rb
 ```
 
-cd into /bin, run
+cd into /workspaces/terraform-beginner-bootcamp-2023//bin, run
 
 ```
 ./build-provider
 ```
 
-then you can run apply
+this compiles the terraform provider for terratowns
+
+then cd into /workspaces/terraform-beginner-bootcamp-2023, run:
+
+```
+terraform init
+terraform apply
+```
+
+to create resources.

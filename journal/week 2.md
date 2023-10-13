@@ -505,10 +505,12 @@ TF_LOG=DEB terraform init
 ```
 
 ### CRUD
-
+[Crud](https://www.codecademy.com/article/what-is-crud) stands for Create, Read, Update, and Delete. It represents the four basic operations that can be performed on data in a database or any persistent storage system. These operations are fundamental in the context of data management and are typically associated with database systems, web applications, and APIs.
 
 
 ### ERRORS
+
+I got this error, the error implies that I don't have `sinatra` running.
 ```
 ╷
 │ Error: Post "http://localhost:4567/api/u/e328f4ab-b99f-421c-84c9-4ccea042c7d1/homes": dial tcp [::1]:4567: connect: connection refused
@@ -519,4 +521,14 @@ TF_LOG=DEB terraform init
 │ 
 ╵
 ```
+
+To fix the error:
+
+```
+cd /workspaces/terraform-beginner-bootcamp-2023/terratowns_mock_server
+bundle install
+bundle exec ruby server.rb
+```
+
+This will bring up the server on port 4567
 
