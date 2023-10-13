@@ -9,3 +9,30 @@
 
 ## EXTRAS
 - [Markdown TOC Generator](https://derlin.github.io/bitdowntoc/)
+
+
+### RUNNING TERRAFORM PROVIDER TERRATOWNS
+cd into /workspaces/terraform-beginner-bootcamp-2023/terratowns_mock_server
+run, this spins up `sinatra` hosted one port 4567
+
+```
+bundle install
+bundle exec ruby server.rb
+```
+
+cd into /workspaces/terraform-beginner-bootcamp-2023//bin, run
+
+```
+./build-provider
+```
+
+this compiles the terraform provider for terratowns
+
+then cd into /workspaces/terraform-beginner-bootcamp-2023, run:
+
+```
+terraform init
+terraform apply
+```
+
+to create resources.

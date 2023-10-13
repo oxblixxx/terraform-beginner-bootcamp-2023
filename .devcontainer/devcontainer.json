@@ -1,5 +1,39 @@
- {
-     "name": "Terraform Codespace",
-     "extensions": ["amazonwebservices.aws-toolkit-vscode", "hashicorp.terraform"],
-     "postCreateCommand": "/workspaces/terraform-beginner-bootcamp-2023/bin/setup_codespace.sh"
-   }
+// .devcontainer/devcontainer.json
+
+{
+  "name": "Your Dev Container",
+  "extensions": ["amazonwebservices.aws-toolkit-vscode", "hashicorp.terraform"],
+  "services": [
+    {
+      "name": "AWS",
+      "image": "amazon/aws-cli",
+      "postCreateCommand": ["/bin/bash", "/workspaces/terraform-beginner-bootcamp-2023/bin/setup-aws.sh"]
+    },
+    {
+      "name": "Terraform",
+      "image": "hashicorp/terraform",
+      "postCreateCommand": [
+        "/bin/bash",
+        "/workspaces/terraform-beginner-bootcamp-2023/bin/terraform.sh",
+        "source '/workspaces/terraform-beginner-bootcamp-2023/bin/create_credentials_trfc'",
+        "source '/workspaces/terraform-beginner-bootcamp-2023/bin/tf_alias'",
+        "cp '/workspaces/terraform-beginner-bootcamp-2023/terraform.tfvars.example' '/workspaces/terraform-beginner-bootcamp-2023/variables.tfvars'",
+        "source ~/.bash_profile"
+      ]
+    },
+    {
+      "name": "HTTP-Server",
+      "image": "node",
+      "runArgs": ["-v", "${PWD}:/workspace"],
+      "postCreateCommand": [
+        "/bin/bash",
+        "-c",
+        "apt-get update && apt-get install -y npm && npm install --global http-server && http-server"
+      ]
+    },
+    {
+      "name": "Credentials",
+      "postCreateCommand": ["nano", "/home/codespace/.terraform.d/credentials.tfrc.json"]
+    }
+  ]
+}
