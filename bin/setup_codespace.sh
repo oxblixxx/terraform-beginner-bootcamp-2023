@@ -15,3 +15,5 @@ source '/workspaces/terraform-beginner-bootcamp-2023/bin/aws'
 
 # Install http-server
 npm install --global http-server
+
+export PROJECT_ROOT=/workspaces/terraform-beginner-bootcamp-2023

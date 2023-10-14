@@ -1,7 +1,13 @@
 error_html_file_path="./public/error.html"
 index_html_file_path="./public/index.html"
 content_version=1
-assets_path="./public/assets/*"
 user_uuid=""
 token=""
-
+culinaris = {
+  public_path = "./public/culinaris"
+  content_version = 2 
+}
+astra = {
+  public_path = "./public/astra"
+  content_version = 1 
+}

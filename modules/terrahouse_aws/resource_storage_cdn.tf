@@ -31,10 +31,10 @@ resource "terraform_data" "content_version" {
 resource "aws_s3_object" "index_object" {
   bucket =  aws_s3_bucket.bootcamp_bucket.bucket
   key    = "index.html"
-  source = var.index_html_file_path
+  source = "${var.public_path}/index.html"
   content_type = "text/html"
 
-  etag = filemd5(var.index_html_file_path)
+  etag = filemd5("${var.public_path}/index.html")
 
 # https://developer.hashicorp.com/terraform/language/meta-arguments/lifecycle
   lifecycle {
@@ -47,22 +47,22 @@ resource "aws_s3_object" "index_object" {
 resource "aws_s3_object" "error_object" {
   bucket =  aws_s3_bucket.bootcamp_bucket.bucket
   key    = "error.html"
-  source = var.error_html_file_path
+  source = "${var.public_path}/error.html"
   content_type = "text/html"
 
 
-  etag = filemd5(var.error_html_file_path)
+  etag = filemd5("${var.public_path}/error.html")
 }
 
 resource "aws_s3_object" "assets_object" {
   bucket =  aws_s3_bucket.bootcamp_bucket.bucket
   key    =  "assets/${each.key}"
-  for_each = fileset(var.assets_path, "*.jpeg")
-  source = "${var.assets_path}/${each.key}"
+  for_each = fileset("${var.public_path}/assets", "*.{jpg,png,gif}")
+  source = "${var.public_path}/assets}/${each.key}"
   #content_type = "text/html"
 
 
-  etag = filemd5("${path.root}/public/assets/${each.key}")
+  etag = filemd5("${var.public_path}/assets}/${each.key}")
 
 
   lifecycle {

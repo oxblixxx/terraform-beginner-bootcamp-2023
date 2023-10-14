@@ -14,7 +14,7 @@ variable "environment" {
 }
 
 
-variable "user-uuid" {
+variable "user_uuid" {
   description = "Exampro user-uuid"
 }
 
@@ -23,18 +23,6 @@ variable "bootcamp_bucket_arn" {
 }
 
 
-variable "index_html_file_path" {
-  type        = string
-  description = "file path to index.html file"
-}
-
-
-
-variable "error_html_file_path" {
-  type        = string
-  description = "file path to index.html file"
-}
-
 
 
 variable "content_version" {
@@ -42,26 +30,39 @@ variable "content_version" {
   description = "variable for lifecycle for positive interger"
 }
 
- variable "cdn_invalidate_path" {
-   type = string
-   description = "file path to cdn invalidate file"
- }
+# variable "cdn_invalidate_path" {
+#   type        = string
+#   description = "file path to cdn invalidate file"
+# }
 
 
-variable "assets_path" {
-  type = string
-  description = "path to assets to upload"
-}
 
 
+# variable "token" {
+#   type        = string
+#   description = "AWS Terraform Bootcamp 2023"
+# }
+
+
+# variable "user_uuid" {
+#   type        = string
+#   description = "AWS Terraform Bootcamp 2023"
+# }
 
 variable "token" {
   type        = string
-  description = "AWS Terraform Bootcamp 2023"
+  description = "public path"
+}
+variable "astra" {
+  type = object({
+    public_path = string
+    content_version = number
+  })
 }
 
-
-variable "user_uuid" {
-  type        = string
-  description = "AWS Terraform Bootcamp 2023"
+variable "culinaris" {
+  type = object({
+    public_path = string
+    content_version = number
+  })
 }

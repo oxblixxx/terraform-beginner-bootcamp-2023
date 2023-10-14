@@ -516,8 +516,9 @@ terraform apply
 ```
 
 
-### ERRORS
+## ERRORS
 
+### SERVER ERROR
 I got this error, the error implies that I don't have `sinatra` running.
 ```
 ╷
@@ -540,3 +541,47 @@ bundle exec ruby server.rb
 
 This will bring up the server on port 4567
 
+### TERRRAFORM VERSION
+
+Got this error while setting up `terraform cloud`
+```
+Initializing Terraform Cloud...
+Initializing modules...
+╷
+│ Error: Incompatible Terraform version
+│ 
+│ The local Terraform version (1.6.1) does not meet the version requirements for remote workspace oxblixxx/aws-terraform (~> 1.5.0).
+│ 
+│ If you're sure you want to upgrade the state, you can force Terraform to continue using the -ignore-remote-version flag. This may result in an unusable workspace.
+```
+
+*To fix this* login to terraform cloud, navigate to `general` change the terraform version to the same version as local terraform version, run `terraform init` again.
+
+Afterwards, I got this error
+
+```
+ Error: Failed to query available provider packages
+│ 
+│ Could not retrieve the list of available versions for provider
+│ local.providers/local/terratowns: could not connect to local.providers:
+│ failed to request discovery document: Get
+│ "https://local.providers/.well-known/terraform.json": dial tcp: lookup
+│ local.providers on 10.184.0.2:53: no such host
+╵
+```
+
+I haven't been able to resolve it, resulting me to fall back to using `local state file`
+
+To return to [local state](https://nedinthecloud.com/2022/03/03/migrating-state-data-off-terraform-cloud/)
+
+```sh
+mkdir -p terraform.tfstate.d/tfc-migration-test
+
+terraform state pull > terraform.tfstate.d/tfc-migration-test/terraform.tfstate
+
+mv .terraform/terraform.tfstate .terraform/terraform.tfstate.old
+
+# Remove the cloud block in the config
+
+terraform init
+```
