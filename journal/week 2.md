@@ -507,6 +507,14 @@ TF_LOG=DEB terraform init
 ### CRUD
 [Crud](https://www.codecademy.com/article/what-is-crud) stands for Create, Read, Update, and Delete. It represents the four basic operations that can be performed on data in a database or any persistent storage system. These operations are fundamental in the context of data management and are typically associated with database systems, web applications, and APIs.
 
+## TERRATOWNS
+Signed up on [terratowns][terratowns.cloud] to deploy the testing home `missingo`, fetched `token` from [exampro](exampro.co) and `user-uuid`. 
+In my `resource block`, I updated the town to `missingo` altered my `domain_name` with a letter to fix an error `domain as already been used`. To deploy to missingo run:
+```
+terraform init
+terraform apply
+```
+
 
 ### ERRORS
 
