@@ -515,9 +515,48 @@ terraform init
 terraform apply
 ```
 
+### CREATING MULTI-HOMES.
+To deploy to terratowns, pull the module in your `main.tf` file. Set the variables.
 
-### ERRORS
+```
+module "culinaris" {
+  source                = "./modules/terrahouse_aws"
+  token                 = var.token
+  user-uuid             = var.user_uuid
+  public_path = var.culinaris.public_path
+  environment           = var.environment
+  name                  = var.name
+  bootcamp_bucket_arn   = var.bootcamp_bucket_arn
+  content_version = var.content_version
+  # cdn_invalidate_path = var.cdn_invalidate_path
+}
 
+```
+
+Deploying a resource to terratowns takes this arguments :
+Town - preferred town you want to deploy to
+```
+
+resource "terratowns_home" "culinary" {
+  name        = "How to "
+  description = <<DESCRIPTION
+The lumiberry tale
+DESCRIPTION
+  domain_name = module.terrahouse_aws.cdn_s3_distribution_domain
+  town            = "cooker-cove"
+  content_version = 1
+}
+
+```
+
+Run `terraform plan` to see the resources, then run `terraform apply`. After succesful deployment, login to `terratowns.cloud` to see your resource deployed.
+
+
+
+
+## ERRORS
+
+### SERVER ERROR
 I got this error, the error implies that I don't have `sinatra` running.
 ```
 ╷
@@ -540,3 +579,61 @@ bundle exec ruby server.rb
 
 This will bring up the server on port 4567
 
+### TERRRAFORM VERSION
+
+Got this error while setting up `terraform cloud`
+```
+Initializing Terraform Cloud...
+Initializing modules...
+╷
+│ Error: Incompatible Terraform version
+│ 
+│ The local Terraform version (1.6.1) does not meet the version requirements for remote workspace oxblixxx/aws-terraform (~> 1.5.0).
+│ 
+│ If you're sure you want to upgrade the state, you can force Terraform to continue using the -ignore-remote-version flag. This may result in an unusable workspace.
+```
+
+*To fix this* login to terraform cloud, navigate to `general` change the terraform version to the same version as local terraform version, run `terraform init` again.
+
+Afterwards, I got this error
+
+```
+ Error: Failed to query available provider packages
+│ 
+│ Could not retrieve the list of available versions for provider
+│ local.providers/local/terratowns: could not connect to local.providers:
+│ failed to request discovery document: Get
+│ "https://local.providers/.well-known/terraform.json": dial tcp: lookup
+│ local.providers on 10.184.0.2:53: no such host
+╵
+```
+
+I haven't been able to resolve it, resulting me to fall back to using `local state file`
+
+To return to [local state](https://nedinthecloud.com/2022/03/03/migrating-state-data-off-terraform-cloud/)
+
+```sh
+mkdir -p terraform.tfstate.d/tfc-migration-test
+
+terraform state pull > terraform.tfstate.d/tfc-migration-test/terraform.tfstate
+
+mv .terraform/terraform.tfstate .terraform/terraform.tfstate.old
+
+# Remove the cloud block in the config
+
+terraform init
+```
+
+### OAC EXIST ERROR
+I got this error
+
+````
+: creating Amazon CloudFront Origin Access Control (OAC for terratowns): OriginAccessControlAlreadyExists: An origin access control with the same name already exists.
+│       status code: 409, request id: 442cad06-8b12-4a99-aa74-f779af8c6a2a
+│ 
+│   with module.culinaris.aws_cloudfront_origin_access_control.terratowns,
+│   on modules/terrahouse_aws/resource_cdn.tf line 61, in resource "aws_cloudfront_origin_access_control" "terratowns":
+│   61: resource "aws_cloudfront_origin_access_control" "terratowns" {
+```
+
+I had previously deleted my infrastructure, deleted manually on `aws console`. Still didn't resolve that, but my town is succesfully deployed on `terratowns`
