@@ -515,6 +515,44 @@ terraform init
 terraform apply
 ```
 
+### CREATING MULTI-HOMES.
+To deploy to terratowns, pull the module in your `main.tf` file. Set the variables.
+
+```
+module "culinaris" {
+  source                = "./modules/terrahouse_aws"
+  token                 = var.token
+  user-uuid             = var.user_uuid
+  public_path = var.culinaris.public_path
+  environment           = var.environment
+  name                  = var.name
+  bootcamp_bucket_arn   = var.bootcamp_bucket_arn
+  content_version = var.content_version
+  # cdn_invalidate_path = var.cdn_invalidate_path
+}
+
+```
+
+Deploying a resource to terratowns takes this arguments :
+Town - preferred town you want to deploy to
+```
+
+resource "terratowns_home" "culinary" {
+  name        = "How to "
+  description = <<DESCRIPTION
+The lumiberry tale
+DESCRIPTION
+  domain_name = module.terrahouse_aws.cdn_s3_distribution_domain
+  town            = "cooker-cove"
+  content_version = 1
+}
+
+```
+
+Run `terraform plan` to see the resources, then run `terraform apply`. After succesful deployment, login to `terratowns.cloud` to see your resource deployed.
+
+
+
 
 ## ERRORS
 
@@ -585,3 +623,17 @@ mv .terraform/terraform.tfstate .terraform/terraform.tfstate.old
 
 terraform init
 ```
+
+### OAC EXIST ERROR
+I got this error
+
+````
+: creating Amazon CloudFront Origin Access Control (OAC for terratowns): OriginAccessControlAlreadyExists: An origin access control with the same name already exists.
+│       status code: 409, request id: 442cad06-8b12-4a99-aa74-f779af8c6a2a
+│ 
+│   with module.culinaris.aws_cloudfront_origin_access_control.terratowns,
+│   on modules/terrahouse_aws/resource_cdn.tf line 61, in resource "aws_cloudfront_origin_access_control" "terratowns":
+│   61: resource "aws_cloudfront_origin_access_control" "terratowns" {
+```
+
+I had previously deleted my infrastructure, deleted manually on `aws console`. Still didn't resolve that, but my town is succesfully deployed on `terratowns`
