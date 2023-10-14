@@ -16,13 +16,13 @@ module "terrahouse_aws" {
 resource "terratowns_home" "home" {
   name = "How to play Arcanum in 2023!"
   description = <<DESCRIPTION
-Arcanum is a game from 2001 that shipped with alot of bugs.
+Arcanum is a game from 2001 that shipped with alot of for big ox.
 Modders have removed all the originals making this game really fun
 to play (despite that old look graphics). This is my guide that will
 show you how to play arcanum without spoiling the plot.
 DESCRIPTION
   #domain_name = module.terrahouse_aws.cloudfront_url
-  domain_name = "3fdq3gz.cloudfront.net"
-  town = "gamers-grotto"
+  domain_name = "3fdq3gaz.cloudfront.net"
+  town = "missingo"
   content_version = 1
 }

@@ -12,5 +12,5 @@ sudo rm -rf $PROJECT_ROOT/.terraform.lock.hcl
 go build -o "$PLUGIN_NAME"
 sudo mkdir -p "$PLUGIN_DIR/x86_64/"
 sudo mkdir -p "$PLUGIN_DIR/linux_amd64/"
-sudo cp $PLUGIN_NAME "$PLUGIN_DIR/x86_64"
+sudo cp "$PLUGIN_NAME" "$PLUGIN_DIR/x86_64"
 sudo cp "$PLUGIN_NAME" "$PLUGIN_DIR/linux_amd64"
