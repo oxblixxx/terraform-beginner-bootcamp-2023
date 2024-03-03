@@ -16,9 +16,9 @@ variable "user-uuid" {
   }
 }
 
-variable "bootcamp_bucket_arn" {
-  description = "bootcamp bucket arn"
-}
+# variable "bootcamp_bucket_arn" {
+#   description = "bootcamp bucket arn"
+# }
 
 variable "content_version" {
   type = number
@@ -39,7 +39,7 @@ variable "content_version" {
 # }
 
 
-variable "public_path" {
+variable "portfolio" {
   type = string
   description = "public path"
 }

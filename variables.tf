@@ -6,7 +6,7 @@
 
 variable "name" {
   type        = string
-  description = "AWS Terraform Bootcamp 2023"
+  description = "Portfolio Website"
 }
 
 variable "environment" {
@@ -15,12 +15,12 @@ variable "environment" {
 
 
 variable "user_uuid" {
-  description = "Exampro user-uuid"
+  description = "Portfolio Website"
 }
 
-variable "bootcamp_bucket_arn" {
-  description = "bootcamp bucket arn"
-}
+# variable "bootcamp_bucket_arn" {
+#   description = "bootcamp bucket arn"
+# }
 
 
 
@@ -53,16 +53,10 @@ variable "token" {
   type        = string
   description = "public path"
 }
-variable "astra" {
+variable "portfolio" {
   type = object({
     public_path = string
     content_version = number
   })
 }
 
-variable "culinaris" {
-  type = object({
-    public_path = string
-    content_version = number
-  })
-}
