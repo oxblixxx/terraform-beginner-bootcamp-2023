@@ -56,12 +56,12 @@ resource "aws_s3_object" "error_object" {
 
 resource "aws_s3_object" "oxblixxx_object" {
   bucket =  aws_s3_bucket.bootcamp_bucket.bucket
-  key    = "rimijoker.html"
-  source = "${var.portfolio}/rimijoker.html"
+  key    = "oxblixxx.html"
+  source = "${var.portfolio}/oxblixxx.html"
   content_type = "text/html"
 
 
-  etag = filemd5("${var.portfolio}/rimijoker.html")
+  etag = filemd5("${var.portfolio}/oxblixxx.html")
 }
 
 # https://stackoverflow.com/questions/57456167/uploading-multiple-files-in-aws-s3-from-terraform
