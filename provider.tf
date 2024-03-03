@@ -25,3 +25,10 @@ terraform {
 #   }
 # }
 
+terraform {
+  backend "s3" {
+    bucket         = "cloud-my-s3-bucket-25-05-2023"
+    key            = "terraform.tfstate"
+    region         = "us-east-1"
+  }
+}
