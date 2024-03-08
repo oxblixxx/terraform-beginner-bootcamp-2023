@@ -56,12 +56,12 @@ resource "aws_s3_object" "error_object" {
 
 resource "aws_s3_object" "oxblixxx_object" {
   bucket =  aws_s3_bucket.bootcamp_bucket.bucket
-  key    = "oxblixxx.html"
-  source = "${var.portfolio}/oxblixxx.html"
+  key    = "rimijoker.html"
+  source = "${var.portfolio}/rimijoker.html"
   content_type = "text/html"
 
 
-  etag = filemd5("${var.portfolio}/oxblixxx.html")
+  etag = filemd5("${var.portfolio}/rimijoker.html")
 }
 
 # https://stackoverflow.com/questions/57456167/uploading-multiple-files-in-aws-s3-from-terraform
@@ -73,26 +73,6 @@ resource "aws_s3_object" "assets_files" {
   source       = "${var.portfolio}/assets/${each.value}"
   etag = "${var.portfolio}/assets/${each.value}"
 }
-
-
-# resource "aws_s3_object" "assets_object" {
-#   bucket =  aws_s3_bucket.bootcamp_bucket.bucket
-#   key    =  "assets/${each.key}"
-#   for_each = fileset("${var.portfolio}/assets", "*")
-#   source = "${var.portfolio}/assets/${each.key}"
-#   content_type = "text/html"
-
-
-#   etag = filemd5("${var.portfolio}/assets/${each.key}")
-
-
-#   lifecycle {
-#     replace_triggered_by = [terraform_data.content_version]
-#     ignore_changes = [etag]
-#   }
-# }
-
-
 
 
 # https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/s3_bucket_policy

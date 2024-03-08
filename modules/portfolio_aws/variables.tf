@@ -16,9 +16,6 @@ variable "user-uuid" {
   }
 }
 
-# variable "bootcamp_bucket_arn" {
-#   description = "bootcamp bucket arn"
-# }
 
 variable "content_version" {
   type = number
@@ -27,17 +24,6 @@ variable "content_version" {
     error_message = "The positive_integer variable must be a positive integer greater than zero."
   }
 }
-
-# variable "cdn_invalidate_path" {
-#   type = string
-#   description = "file path to cdn invalidate file"
-
-#   validation {
-#   condition = fileexists(var.cdn_invalidate_path)
-#   error_message = "file does not exist, please create one"  
-#   }
-# }
-
 
 variable "portfolio" {
   type = string
