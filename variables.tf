@@ -1,6 +1,7 @@
 variable "name" {
   type        = string
   description = "Portfolio Website"
+  default = "porfolio-website"
 }
 
 variable "environment" {

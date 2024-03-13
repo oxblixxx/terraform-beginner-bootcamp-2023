@@ -59,7 +59,7 @@ resource "aws_cloudfront_distribution" "s3_distribution" {
 
 # https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/cloudfront_origin_access_control
 resource "aws_cloudfront_origin_access_control" "portfolio" {
-  name                              = "OAC for oxblixxx portfolio"
+  name                              = "OAC for oxblix portfolio"
   description                       = "Origin Access Control for terratows"
   origin_access_control_origin_type = "s3"
   signing_behavior                  = "always"

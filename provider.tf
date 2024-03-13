@@ -18,7 +18,9 @@ terraform {
   }
 }
 
-
+provider "aws" {
+  region = "us-west-2"
+}
 # terraform {
 #   backend "local" {
 #     path = "terraform.tfstate"
