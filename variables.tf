@@ -12,6 +12,7 @@ variable "environment" {
 
 variable "user_uuid" {
   description = "Portfolio Website"
+  default = "oxblixx-portfolio-bucket"
 }
 
 variable "content_version" {
@@ -21,7 +22,7 @@ variable "content_version" {
 
 variable "token" {
   type        = string
-  description = "public path"
+  
 }
 variable "portfolio" {
   type = object({
